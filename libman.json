@@ -5,6 +5,10 @@
     {
       "library": "jqueryui@1.12.1",
       "destination": "wwwroot/lib/jquery-ui/"
+    },
+    {
+      "library": "magnific-popup.js@1.1.0",
+      "destination": "wwwroot/magnific-popup.js/"
     }
   ]
 }

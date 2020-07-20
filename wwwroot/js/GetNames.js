@@ -18,7 +18,7 @@
                 }
             })
         },
-        delay: 500,
+        delay: 600,
         minLength: 2,
         select: function (event, ui) {
             $.ajax({
@@ -27,9 +27,8 @@
                 data: { idf: ui.item.idf, cemNo: ui.item.cemNo },
                 beforeSend: clearSearch(),
                 success: function (data) {
-                    console.log("success");
-                    console.log(data);
                     $("#partialGoesHere").append(data);
+                    popUp();
                 },
                 error: function (response) {
                     var msg = response.error;
@@ -65,4 +64,22 @@ function clearSearch() {
 function showFail(msg) {
     "use strict";
     $("#partialGoesHere").html("<div class='alert alert-danger'>" + msg + "</div>");
+}
+
+function popUp() {
+    "use strict";
+    $('.with-caption').magnificPopup({
+        type: 'image',
+        closeBtnInside: false,
+        mainClass: 'mfp-with-zoom mfp-img-mobile',
+        closeOnContentClick: true,
+        image: {
+            verticalFit: true,
+            tError: '<a href="%url%">The image</a> could not be loaded.' // Error message
+        },
+        gallery: {
+            enabled: true
+        },
+        closeMarkup: '<button type="button" class="mfp-close">&#215;</button>'
+    });
 }

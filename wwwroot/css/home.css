@@ -1,5 +1,5 @@
 ﻿/******     Carousel Styling     ******/
-/*.carousel-control-prev-icon,
+.carousel-control-prev-icon,
 .carousel-control-next-icon {
     height: 100px;
     width: 100px;
@@ -39,7 +39,7 @@
     height: 38px;
     margin: 10px;
     background-color: #ffff99;
-}*/
+}
 
 /** Autocomplete dropdown **/
 .ui-autocomplete {
@@ -56,14 +56,14 @@
 }
 
 /******    Popup images     ******/
-/*.image-link {
+.image-link {
     cursor: -webkit-zoom-in;
     cursor: -moz-zoom-in;
     cursor: zoom-in;
-}*/
+}
 
-/* Page Styling */
-/*h5 {
+ Page Styling 
+h5 {
     text-decoration: underline;
 }
 
@@ -87,4 +87,4 @@ img {
 
 dl {
     margin-bottom: 0rem;
-}*/
+}

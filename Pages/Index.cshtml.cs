@@ -49,7 +49,7 @@ namespace Centralization.Pages
             return new PartialViewResult
             {
                 ViewName = "_IntermentPartial",
-                ViewData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<Interment>(ViewData, intermentProfile)
+                ViewData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<IntermentProfile>(ViewData, intermentProfile)
             };
         }
     }
