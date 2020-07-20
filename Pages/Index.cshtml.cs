@@ -44,11 +44,12 @@ namespace Centralization.Pages
         public PartialViewResult OnGetData(int idf, string cemNo)
         {
             var interment = _context.Interments.Find(new object[] { idf, cemNo });
+            var intermentProfile = new IntermentProfile(interment);
             //return new JsonResult(interment);
             return new PartialViewResult
             {
                 ViewName = "_IntermentPartial",
-                ViewData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<Interment>(ViewData, interment)
+                ViewData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<Interment>(ViewData, intermentProfile)
             };
         }
     }
