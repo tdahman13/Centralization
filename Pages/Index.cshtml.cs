@@ -29,14 +29,56 @@ namespace Centralization.Pages
             interments = await _context.Interments.Take(100).ToListAsync();
         }
 
-        public IActionResult OnGetSearch(string term)
+        public async Task<IActionResult> OnGetSearchBothNamesAsync(string term, string cemetery)
         {
+            string first, last;
             var intermentsIQ = from z in _context.Interments
-                             select z;
+                               select z;
 
-            intermentsIQ = intermentsIQ.AsNoTracking()
-                .Where(x => x.LastName.Contains(term));
-            var result = intermentsIQ.Take(500).ToList();
+            if (!string.IsNullOrEmpty(cemetery))
+            {
+                intermentsIQ = intermentsIQ.Where(x => x.CemNo.Equals(cemetery));
+            }
+
+            if (term.Contains(','))
+            {
+                string[] name = term.Split(',');
+                last = name[0];
+                first = name[1].Trim();
+                for(int i = 2; i < name.Length; i++)
+                {
+                    first += name[i];
+                }
+                intermentsIQ = intermentsIQ.AsNoTracking()
+                    .Where(x => x.LastName.Contains(last) && x.FirstName.Contains(first));
+            }
+            else
+            {
+                intermentsIQ = intermentsIQ.AsNoTracking()
+                    .Where(x => x.LastName.Contains(term));
+            }
+
+            var result = await intermentsIQ.Take(500).ToListAsync();
+
+            return new JsonResult(result);
+        }
+
+        public async Task<IActionResult> OnGetSearchFullNamesAsync(string term, string cemetery)
+        {
+            //var intermentsIQ = from z in _context.Interments
+            //                   select z;
+
+            //if (!string.IsNullOrEmpty(cemetery))
+            //{
+            //    intermentsIQ = intermentsIQ.Where(x => x.CemNo.Equals(cemetery));
+            //}
+
+            //intermentsIQ = intermentsIQ.Where(x => x.FullName.Contains(term));
+
+            //var result = await intermentsIQ.Take(500).ToListAsync();
+
+            var names = _context.Interments.FromSqlRaw("GetIntermentsByFullName @p0", term);
+            var result = await names.AsNoTracking().ToListAsync();
 
             return new JsonResult(result);
         }

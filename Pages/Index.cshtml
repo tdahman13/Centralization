@@ -15,7 +15,7 @@
     </p>
     <div class="form-row">
         @Html.Label("Cemetery", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "cemeterySearch" })
-        @Html.DropDownList("cemterySearch", (IEnumerable<SelectListItem>)Model.cemeteries,
+        @Html.DropDownList("cemeterySearch", (IEnumerable<SelectListItem>)Model.cemeteries,
             "Select ...", new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3"})
         @Html.Label("Name (Last, First)", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "searchName"})
         @Html.TextBox("searchName", null, 
