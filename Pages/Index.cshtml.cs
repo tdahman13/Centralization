@@ -41,10 +41,15 @@ namespace Centralization.Pages
             return new JsonResult(result);
         }
 
-        public IActionResult OnGetData(int idf, string cemNo)
+        public PartialViewResult OnGetData(int idf, string cemNo)
         {
             var interment = _context.Interments.Find(new object[] { idf, cemNo });
-            return new JsonResult(interment);
+            //return new JsonResult(interment);
+            return new PartialViewResult
+            {
+                ViewName = "_IntermentPartial",
+                ViewData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<Interment>(ViewData, interment)
+            };
         }
     }
 }

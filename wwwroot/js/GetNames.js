@@ -25,17 +25,22 @@
                 url: "/Index?handler=Data",
                 type: "GET",
                 data: { idf: ui.item.idf, cemNo: ui.item.cemNo },
+                beforeSend: clearSearch(),
                 success: function (data) {
                     console.log("success");
                     console.log(data);
+                    $("#partialGoesHere").append(data);
                 },
                 error: function (response) {
-                    alert("Error Check Console.");
-                    console.log(response);
+                    var msg = response.error;
+                    showFail(msg);
                 },
                 failure: function (response) {
-                    alert("Fail Check Console.");
-                    console.log(response);
+                    var msg = response.error;
+                    showFail(msg);
+                },
+                complete: function () {
+                    $("#loading-image").hide();
                 }
             })
         }
@@ -47,4 +52,17 @@ function clearInput(obj) {
     var sib = $(obj).prev();
     $(sib).val("");
     $(sib).focus();
+}
+
+// Clicking search removes old search values
+function clearSearch() {
+    "use strict";
+    $("#partialGoesHere").empty();
+    $("#loading-image").show();
+}
+
+// On ajax failure
+function showFail(msg) {
+    "use strict";
+    $("#partialGoesHere").html("<div class='alert alert-danger'>" + msg + "</div>");
 }
