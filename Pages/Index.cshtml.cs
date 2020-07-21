@@ -65,20 +65,9 @@ namespace Centralization.Pages
 
         public async Task<IActionResult> OnGetSearchFullNamesAsync(string term, string cemetery)
         {
-            //var intermentsIQ = from z in _context.Interments
-            //                   select z;
-
-            //if (!string.IsNullOrEmpty(cemetery))
-            //{
-            //    intermentsIQ = intermentsIQ.Where(x => x.CemNo.Equals(cemetery));
-            //}
-
-            //intermentsIQ = intermentsIQ.Where(x => x.FullName.Contains(term));
-
-            //var result = await intermentsIQ.Take(500).ToListAsync();
-
-            var names = _context.Interments.FromSqlRaw("GetIntermentsByFullName @p0", term);
-            var result = await names.AsNoTracking().ToListAsync();
+            // Call stored procedure to get interments, cemetery can be null
+            var names = _context.Interments.FromSqlRaw("GetIntermentsByFullNameAndCemNo @p0, @p1", term, cemetery);
+            var result = await names.AsNoTracking().ToArrayAsync();
 
             return new JsonResult(result);
         }
