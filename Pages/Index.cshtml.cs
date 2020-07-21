@@ -24,12 +24,14 @@ namespace Centralization.Pages
             _context = context;
         }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            interments = await _context.Interments.Take(100).ToListAsync();
+            Interment emptyInterred = new Interment();
+            interments = new List<Interment> { emptyInterred };
+            //interments = await _context.Interments.Take(100).ToListAsync();
         }
 
-        public async Task<IActionResult> OnGetSearchBothNamesAsync(string term, string cemetery)
+        public IActionResult OnGetSearchBothNames(string term, string cemetery)
         {
             string first, last;
             var intermentsIQ = from z in _context.Interments
@@ -45,7 +47,7 @@ namespace Centralization.Pages
                 string[] name = term.Split(',');
                 last = name[0];
                 first = name[1].Trim();
-                for(int i = 2; i < name.Length; i++)
+                for (int i = 2; i < name.Length; i++)
                 {
                     first += name[i];
                 }
@@ -58,16 +60,16 @@ namespace Centralization.Pages
                     .Where(x => x.LastName.Contains(term));
             }
 
-            var result = await intermentsIQ.Take(500).ToListAsync();
+            var result = intermentsIQ.AsNoTracking().Take(500).AsQueryable();
 
             return new JsonResult(result);
         }
 
-        public async Task<IActionResult> OnGetSearchFullNamesAsync(string term, string cemetery)
+        public IActionResult OnGetSearchFullNames(string term, string cemetery)
         {
             // Call stored procedure to get interments, cemetery can be null
             var names = _context.Interments.FromSqlRaw("GetIntermentsByFullNameAndCemNo @p0, @p1", term, cemetery);
-            var result = await names.AsNoTracking().ToArrayAsync();
+            var result = names.AsNoTracking().AsQueryable();
 
             return new JsonResult(result);
         }

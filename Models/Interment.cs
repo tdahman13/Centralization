@@ -19,12 +19,17 @@ namespace Centralization.Models
         {
             get { return FirstName + " " + LastName; }
         }
+
+        [Display(Name = "Grave/Crypt")]
         public string GraveCrypt { get; set; }
 
+        [Display(Name = "Lot/Tier")]
         public string LotTier { get; set; }
 
+        [Display(Name = "Block/Building")]
         public string BlockBuilding { get; set; }
 
+        [Display(Name = "Section/Location")]
         public string SectionLocation { get; set; }
 
         [Display(Name = "Date Interred")]
@@ -36,7 +41,7 @@ namespace Centralization.Models
         [Display(Name = "Cemetery Number")]
         public string CemNo { get; set; }
 
-        [Display(Name = "Cemetery Name")]
+        [Display(Name = "Cemetery")]
         public string CemName => Cemeteries.cems[CemNo];
 
         [Display(Name = "Parent Cemetery Name")]

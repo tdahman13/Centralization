@@ -13,23 +13,50 @@
     <p class="lead">
         Type in a name and select to fill form (min 2 characters). Select a cemetery for better search.
     </p>
-    <div class="form-row">
+    <div class="btn-group" role="group" aria-label="Search Options">
+        <button type="button" class="btn btn-secondary active" id="search-by-name-btn">By Name</button>
+        <button type="button" class="btn btn-secondary" id="search-by-location-btn">By Location</button>
+    </div>
+
+    <div class="form-row" id="name-search-form">
         @Html.Label("Cemetery", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "cemeterySearch" })
-        @Html.DropDownList("cemeterySearch", (IEnumerable<SelectListItem>)Model.cemeteries,
-            "Select ...", new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3"})
-        @Html.Label("Name (Last, First)", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "searchName"})
-        @Html.TextBox("searchName", null, 
-            new { @class = "form-control col-12 col-md-9 md-2 mb-md-3", @placeholder = "Last name, First name..."})
+        @Html.DropDownList("cemeterySearch", Model.cemeteries, "Select Cemetery...", new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3" })
+        @Html.Label("Name (Last, First)", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "searchName" })
+        @Html.TextBox("searchName", null,
+            new { @class = "form-control col-12 col-md-9 md-2 mb-md-3", @placeholder = "Last name, First name..." })
         <button class="btn bg-transparent" style="margin-left: -30px; z-index: 100; padding:0rem 0rem 1rem 0rem;"
                 type="button" onclick="clearInput(this)">
             <i class="ui-icon ui-icon-close"></i>
         </button>
-
         @Html.Label("Name (Full)", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "searchFull" })
         @Html.TextBox("searchFull", null, new { @class = "form-control col-12 col-md-9", @placeholder = "Type 2 characters to start searching..." })
         <button class="btn bg-transparent" style="margin-left:-30px; z-index: 100; padding: 0rem 0rem 0rem 0rem;" type="button" onclick="clearInput(this)">
             <i class="ui-icon ui-icon-close"></i>
         </button>
+    </div>
+
+    <div class="form-row" id="location-search-form" style="display:none;">
+        @Html.LabelFor(model => model.interments[0].CemName, null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "cemetery" })
+        @Html.DropDownList("cemetery", Model.cemeteries, "Select Cemetery...", new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3" })
+        <div class="col-12 col-md-2">
+            @Html.LabelFor(model => model.interments[0].GraveCrypt, null, htmlAttributes: new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.interments[0].GraveCrypt, null, new { @class = "form-control", @placeholder = "Grave" })
+        </div>
+        <div class="col-12 col-md-2">
+            @Html.LabelFor(model => model.interments[0].LotTier, null, htmlAttributes: new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.interments[0].LotTier, null, new { @class = "form-control", @placeholder = "Lot" })
+        </div>
+        <div class="col-12 col-md-2">
+            @Html.LabelFor(model => model.interments[0].BlockBuilding, null, htmlAttributes: new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.interments[0].BlockBuilding, null, new { @class = "form-control", @placeholder = "Block" })
+        </div>
+        <div class="col-12 col-md-2">
+            @Html.LabelFor(model => model.interments[0].SectionLocation, null, htmlAttributes: new { @class = "col-form-label" })
+            @Html.TextBoxFor(model => model.interments[0].SectionLocation, null, new { @class = "form-control", @placeholder = "Section" })
+        </div>
+        <div class="col-12 col-md-4 text-center align-self-end">
+            <input type="button" class="btn btn-primary" value="Search"/>
+        </div>
     </div>
 </div>
 

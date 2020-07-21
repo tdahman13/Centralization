@@ -50,6 +50,25 @@
             getData(ui);
         }
     });
+
+    // Hide name-search, show location-search
+    $("#search-by-location-btn").on("click", function () {
+        if ($("#name-search-form").is(":visible")) {
+            $("#search-by-name-btn").removeClass("active");
+            $("#search-by-location-btn").addClass("active");
+            $("#name-search-form").hide();
+            $("#location-search-form").show();
+        }
+    });
+    // Hide location-search, show name-search
+    $("#search-by-name-btn").on("click", function () {
+        if ($("#location-search-form").is(":visible")) {
+            $("#search-by-location-btn").removeClass("active");
+            $("#search-by-name-btn").addClass("active");
+            $("#location-search-form").hide();
+            $("#name-search-form").show();
+        }
+    });
 });
 
 function getData(ui) {
