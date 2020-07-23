@@ -112,6 +112,15 @@
             }
         })
     });
+
+    // Reset Location Form
+    $("#reset-btn").on("click", function () {
+        $("#cemetery").val("");
+        $("#grave").val("");
+        $("#lot").val("");
+        $("#block").val("");
+        $("#section").val("");
+    });
 });
 
 function getData(idf, cemNo) {

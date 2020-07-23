@@ -14,8 +14,8 @@
         Type in a name and select to fill form (min 2 characters). Select a cemetery for better search.
     </p>
     <div class="btn-group" role="group" aria-label="Search Options">
-        <button type="button" class="btn btn-secondary active" id="search-by-name-btn">By Name</button>
-        <button type="button" class="btn btn-secondary" id="search-by-location-btn">By Location</button>
+        <button type="button" class="btn btn-success active" id="search-by-name-btn">By Name</button>
+        <button type="button" class="btn btn-success" id="search-by-location-btn">By Location</button>
     </div>
 
     <div class="form-row" id="name-search-form">
@@ -55,7 +55,10 @@
             @Html.TextBoxFor(model => model.interments[0].SectionLocation, null, new { @class = "form-control", @placeholder = "Section", @id = "section" })
         </div>
         <div class="col-12 col-md-4 text-center align-self-end">
-            <input type="button" class="btn btn-primary" value="Search" id="location-search-btn" />
+            <div class="btn-group" role="group" aria-label="Location Buttons">
+                <input type="button" class="btn btn-primary" value="Search" id="location-search-btn" />
+                <input type="button" class="btn btn-secondary" value="Reset" id="reset-btn" />
+            </div>
         </div>
     </div>
 
