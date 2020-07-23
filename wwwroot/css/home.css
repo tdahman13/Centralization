@@ -88,3 +88,20 @@ img {
 dl {
     margin-bottom: 0rem;
 }
+
+
+/*** Page ***/
+#location-search-results {
+    background-color: #fff;
+    max-height: 11rem;
+    overflow-y: auto;
+    margin: 2rem 0rem 0rem 0rem;
+}
+
+ul{
+    font-weight: 800;
+}
+
+li{
+    font-weight: 500;
+}

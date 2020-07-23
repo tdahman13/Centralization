@@ -76,6 +76,10 @@ namespace Centralization.Pages
 
         public PartialViewResult OnGetData(int idf, string cemNo)
         {
+            if(cemNo.Length == 1)
+            {
+                cemNo = "0" + cemNo;
+            }
             var interment = _context.Interments.Find(new object[] { idf, cemNo });
             var intermentProfile = new IntermentProfile(interment);
             //return new JsonResult(interment);
@@ -84,6 +88,20 @@ namespace Centralization.Pages
                 ViewName = "_IntermentPartial",
                 ViewData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<IntermentProfile>(ViewData, intermentProfile)
             };
+        }
+
+        public IActionResult OnGetSearchLocation(string cemetery, string grave, string lot, string block, string section)
+        {
+            var intermentIQ = from z in _context.Interments
+                              select z;
+            if (!string.IsNullOrEmpty(cemetery))
+                intermentIQ = intermentIQ.Where(z => z.CemNo.Equals(cemetery));
+
+            intermentIQ = intermentIQ.Where(z => z.GraveCrypt.Contains(grave) && 
+                z.LotTier.Contains(lot) && z.BlockBuilding.Contains(block) && z.SectionLocation.Contains(section));
+
+            var result = intermentIQ.AsNoTracking().Take(500).ToArray();
+            return new JsonResult(result);
         }
     }
 }

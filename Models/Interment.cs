@@ -85,11 +85,13 @@ namespace Centralization.Models
                 }
                 if (Type.Equals("1") || Type.Equals("4"))
                 {
-                    return string.Format("Crypt: {0} | Tier: {1} | Building: {2} | Location: {3}", GraveCrypt, LotTier, BlockBuilding, SectionLocation);
+                    return string.Format("Crypt: {0} | Tier: {1} | Building: {2} | Location: {3}",
+                        GraveCrypt, LotTier, BlockBuilding, SectionLocation);
                 }
                 else
                 {
-                    return string.Format("Grave: {0} | Lot: {1} | Block: {2} | Section: {3}", GraveCrypt, LotTier, BlockBuilding, SectionLocation);
+                    return string.Format("Grave: {0} | Lot: {1} | Block: {2} | Section: {3}",
+                        GraveCrypt, LotTier, BlockBuilding, SectionLocation);
                 }
             }
         }
@@ -99,7 +101,8 @@ namespace Centralization.Models
             get
             {
                 return string.Format("{0} {1} - G: {2} | L: {3} | B: {4} | S: {5} => Buried {6} at {7}",
-                    LastName, FirstName, GraveCrypt, LotTier, BlockBuilding, SectionLocation, IDate, CemName);
+                    LastName, FirstName, GraveCrypt, LotTier, BlockBuilding, SectionLocation,
+                    IDate?.ToString("MM/dd/yyyy"), CemName);
             }
         }
     }

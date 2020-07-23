@@ -1,6 +1,27 @@
 ﻿$(document).ready(function () {
     "Use Strict";
 
+    // Hide name-search, show location-search
+    $("#search-by-location-btn").on("click", function () {
+        if ($("#name-search-form").is(":visible")) {
+            $("#search-by-name-btn").removeClass("active");
+            $("#search-by-location-btn").addClass("active");
+            $("#name-search-form").hide();
+            $("#location-search-form").show();
+            $("#location-search-results").show();
+        }
+    });
+    // Hide location-search, show name-search
+    $("#search-by-name-btn").on("click", function () {
+        if ($("#location-search-form").is(":visible")) {
+            $("#search-by-location-btn").removeClass("active");
+            $("#search-by-name-btn").addClass("active");
+            $("#location-search-form").hide();
+            $("#name-search-form").show();
+            $("#location-search-results").hide();
+        }
+    });
+
     // Autocomplete for finding interred (Two Names)
     $("#searchName").autocomplete({
         source: function (request, response) {
@@ -22,7 +43,9 @@
         delay: 600,
         minLength: 2,
         select: function (event, ui) {
-            getData(ui);
+            var idf = ui.item.idf;
+            var cemNo = ui.item.cemNo;
+            getData(idf, cemNo);
         }
     });
 
@@ -47,38 +70,58 @@
         delay: 600,
         minLength: 2,
         select: function (event, ui) {
-            getData(ui);
+            var idf = ui.item.idf;
+            var cemNo = ui.item.cemNo;
+            getData(idf, cemNo);
         }
     });
 
-    // Hide name-search, show location-search
-    $("#search-by-location-btn").on("click", function () {
-        if ($("#name-search-form").is(":visible")) {
-            $("#search-by-name-btn").removeClass("active");
-            $("#search-by-location-btn").addClass("active");
-            $("#name-search-form").hide();
-            $("#location-search-form").show();
-        }
-    });
-    // Hide location-search, show name-search
-    $("#search-by-name-btn").on("click", function () {
-        if ($("#location-search-form").is(":visible")) {
-            $("#search-by-location-btn").removeClass("active");
-            $("#search-by-name-btn").addClass("active");
-            $("#location-search-form").hide();
-            $("#name-search-form").show();
-        }
+    // Get names by location
+    $("#location-search-btn").on("click", function () {
+        var cem = $("#cemetery").val();
+        var grave = $("#grave").val();
+        var lot = $("#lot").val();
+        var block = $("#block").val();
+        var section = $("#section").val();
+        $.ajax({
+            url: "/Index?handler=SearchLocation",
+            type: "GET",
+            data: { cemetery: cem, grave: grave, lot: lot, block: block, section: section },
+            beforeSend: function () {
+                $("#location-search-results").empty();
+                $("#loading-image").show();
+            },
+            success: function (data) {
+                var divToReplace = $("#location-search-results");
+                var orderedList = $("<ul>").append("Result Count: " + data.length).appendTo(divToReplace);
+                $.each(data, function (i, item) {
+                    var params = item.idf + ", " + item.cemNo;
+                    var $tr = $("<li onClick='getData(" + params + ")'>").append(item.label).appendTo(orderedList);
+                });
+            },
+            error: function (response) {
+                var msg = response.error;
+                showFail(msg);
+            },
+            failure: function (response) {
+                var msg = response.error;
+                showFail(msg);
+            },
+            complete: function () {
+                $("#loading-image").hide();
+            }
+        })
     });
 });
 
-function getData(ui) {
+function getData(idf, cemNo) {
     $.ajax({
         url: "/Index?handler=Data",
         type: "GET",
         timeout: 10000,
         contentType: "application/json;charset=utf-8",
         dataType: "html",
-        data: { idf: ui.item.idf, cemNo: ui.item.cemNo },
+        data: { idf: idf, cemNo: cemNo },
         beforeSend: clearSearch(),
         success: function (data) {
             $("#partialGoesHere").append(data);
