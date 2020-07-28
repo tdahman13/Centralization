@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Centralization.Models;
 
 namespace Centralization.DAL
@@ -14,6 +10,6 @@ namespace Centralization.DAL
         {
         }
 
-        public DbSet<Centralization.Models.MemorialApplication> MemorialApplication { get; set; }
+        public DbSet<MemorialApplication> MemorialApplication { get; set; }
     }
 }

@@ -12,9 +12,9 @@ namespace Centralization.Pages.Applications
 {
     public class CreateModel : PageModel
     {
-        private readonly Centralization.DAL.MemorialContext _context;
+        private readonly MemorialContext _context;
 
-        public CreateModel(Centralization.DAL.MemorialContext context)
+        public CreateModel(MemorialContext context)
         {
             _context = context;
         }
@@ -36,6 +36,7 @@ namespace Centralization.Pages.Applications
                 return Page();
             }
 
+            MemorialApplication.UploadDate = DateTime.Now;
             _context.MemorialApplication.Add(MemorialApplication);
             await _context.SaveChangesAsync();
 

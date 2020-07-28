@@ -59,7 +59,7 @@
                 @Html.DisplayFor(modelItem => item.Idf)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CemNo)
+                @Html.DisplayFor(modelItem => Models.Cemeteries.cems[item.CemNo])
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
