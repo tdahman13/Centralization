@@ -11,9 +11,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="MemorialApplication.FileName" class="control-label"></label>
                 <input asp-for="MemorialApplication.FileName" class="form-control" />
                 <span asp-validation-for="MemorialApplication.FileName" class="text-danger"></span>
@@ -22,7 +22,7 @@
                 <label asp-for="MemorialApplication.FilePath" class="control-label"></label>
                 <input asp-for="MemorialApplication.FilePath" class="form-control" />
                 <span asp-validation-for="MemorialApplication.FilePath" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="MemorialApplication.Type" class="control-label"></label>
                 <select asp-for="MemorialApplication.Type" class="form-control" 
@@ -46,14 +46,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="MemorialApplication.CemNo" class="control-label"></label>
-                <input asp-for="MemorialApplication.CemNo" class="form-control" />
+                <select asp-for="MemorialApplication.CemNo" class="form-control"
+                        asp-items="Cemeteries.cemeteriesSelectList"></select>
                 <span asp-validation-for="MemorialApplication.CemNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FileUpload"></label>
+                <input asp-for="FileUpload" type="file" required/>
+                <span asp-validation-for="FileUpload"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
+    <p class="result">
+        @Model.Result
+    </p>
 </div>
 
 <div>

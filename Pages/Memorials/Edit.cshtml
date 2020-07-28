@@ -48,7 +48,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="MemorialApplication.CemNo" class="control-label"></label>
-                <input asp-for="MemorialApplication.CemNo" class="form-control" />
+                <select asp-for="MemorialApplication.CemNo" class="form-control"
+                        asp-items="Centralization.Models.Cemeteries.cemeteriesSelectList"></select>
                 <span asp-validation-for="MemorialApplication.CemNo" class="text-danger"></span>
             </div>
             <div class="form-group">

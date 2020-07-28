@@ -30,6 +30,12 @@ namespace Centralization.Models
 
         [Display(Name = "Cemetery")]
         public string CemNo { get; set; }
+
+        public string GetPath()
+        {
+            return string.Format(@"\{0}\{1}-{2}\{3}\{4}\", Cemeteries.parentCems[CemNo],
+                CemNo, Cemeteries.cems[CemNo], Type, DateTime.Now.Year);
+        }
     }
 
     public enum ApplicationType
