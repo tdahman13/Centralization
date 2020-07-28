@@ -1,0 +1,61 @@
+﻿@page
+@model Centralization.Pages.Applications.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>MemorialApplication</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MemorialApplication.FileName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MemorialApplication.FileName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MemorialApplication.FilePath)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MemorialApplication.FilePath)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MemorialApplication.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MemorialApplication.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MemorialApplication.UploadDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MemorialApplication.UploadDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MemorialApplication.UploadedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MemorialApplication.UploadedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MemorialApplication.Idf)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MemorialApplication.Idf)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MemorialApplication.CemNo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MemorialApplication.CemNo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.MemorialApplication.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -18,7 +18,9 @@ namespace Centralization.Models
 
         public string UploadedBy { get; set; }
 
-        public Interment Interred { get; set; }
+        public int Idf { get; set; }
+
+        public string CemNo { get; set; }
     }
 
     public enum ApplicationType

@@ -23,6 +23,8 @@ namespace Centralization
             services.AddRazorPages();
             services.AddDbContext<IntermentContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("IntermentDatabase")));
+            services.AddDbContext<MemorialContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("MemorialDatabase")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

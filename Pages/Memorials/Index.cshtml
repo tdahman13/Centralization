@@ -1,0 +1,72 @@
+﻿@page
+@model Centralization.Pages.Applications.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MemorialApplication[0].FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemorialApplication[0].FilePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemorialApplication[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemorialApplication[0].UploadDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemorialApplication[0].UploadedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemorialApplication[0].Idf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemorialApplication[0].CemNo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.MemorialApplication) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FilePath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UploadDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UploadedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CemNo)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

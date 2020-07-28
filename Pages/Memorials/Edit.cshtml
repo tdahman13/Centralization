@@ -1,0 +1,65 @@
+﻿@page
+@model Centralization.Pages.Applications.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>MemorialApplication</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MemorialApplication.ID" />
+            <div class="form-group">
+                <label asp-for="MemorialApplication.FileName" class="control-label"></label>
+                <input asp-for="MemorialApplication.FileName" class="form-control" />
+                <span asp-validation-for="MemorialApplication.FileName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemorialApplication.FilePath" class="control-label"></label>
+                <input asp-for="MemorialApplication.FilePath" class="form-control" />
+                <span asp-validation-for="MemorialApplication.FilePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemorialApplication.Type" class="control-label"></label>
+                <select asp-for="MemorialApplication.Type" class="form-control"></select>
+                <span asp-validation-for="MemorialApplication.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemorialApplication.UploadDate" class="control-label"></label>
+                <input asp-for="MemorialApplication.UploadDate" class="form-control" />
+                <span asp-validation-for="MemorialApplication.UploadDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemorialApplication.UploadedBy" class="control-label"></label>
+                <input asp-for="MemorialApplication.UploadedBy" class="form-control" />
+                <span asp-validation-for="MemorialApplication.UploadedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemorialApplication.Idf" class="control-label"></label>
+                <input asp-for="MemorialApplication.Idf" class="form-control" />
+                <span asp-validation-for="MemorialApplication.Idf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemorialApplication.CemNo" class="control-label"></label>
+                <input asp-for="MemorialApplication.CemNo" class="form-control" />
+                <span asp-validation-for="MemorialApplication.CemNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
