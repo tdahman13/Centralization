@@ -26,7 +26,7 @@
     $("#searchName").autocomplete({
         source: function (request, response) {
             $.ajax({
-                url: "/Index?handler=SearchBothNames",
+                url: "/Search?handler=SearchBothNames",
                 type: "GET",
                 data: { term: request.term, cemetery: $("#cemeterySearch").val() },
                 success: function (data) {
@@ -53,7 +53,7 @@
     $("#searchFull").autocomplete({
         source: function (request, response) {
             $.ajax({
-                url: "/Index?handler=SearchFullNames",
+                url: "/Search?handler=SearchFullNames",
                 type: "GET",
                 data: { term: request.term, cemetery: $("#cemeterySearch").val() },
                 success: function (data) {
@@ -84,7 +84,7 @@
         var block = $("#block").val();
         var section = $("#section").val();
         $.ajax({
-            url: "/Index?handler=SearchLocation",
+            url: "/Search?handler=SearchLocation",
             type: "GET",
             data: { cemetery: cem, grave: grave, lot: lot, block: block, section: section },
             beforeSend: function () {
@@ -125,7 +125,7 @@
 
 function getData(idf, cemNo) {
     $.ajax({
-        url: "/Index?handler=Data",
+        url: "/Search?handler=Data",
         type: "GET",
         timeout: 10000,
         contentType: "application/json;charset=utf-8",
