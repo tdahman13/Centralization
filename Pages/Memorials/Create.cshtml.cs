@@ -8,8 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using Centralization.Utilities;
 using System.IO;
-using System.Linq;
-using System.Collections;
 
 namespace Centralization.Pages.Applications
 {
@@ -86,7 +84,7 @@ namespace Centralization.Pages.Applications
                 //await FileUpload.CopyToAsync(fileStream);
             }
 
-            // Save in DB
+            // Set and Save Application in DB
             MemorialApplication.FilePath = MemorialApplication.GetPath();
             MemorialApplication.FileName = trustedFileNameForFileStorage;
             MemorialApplication.UploadDate = DateTime.Now;

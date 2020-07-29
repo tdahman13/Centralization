@@ -50,12 +50,6 @@ namespace Centralization.Utilities
             },
         };
 
-        // **WARNING!**
-        // In the following file processing methods, the file's content isn't scanned.
-        // In most production scenarios, an anti-virus/anti-malware scanner API is
-        // used on the file before making the file available to users or other
-        // systems. For more information, see the topic that accompanies this sample app.
-
         public static async Task<byte[]> ProcessFormFile<T>(IFormFile formFile,
             ModelStateDictionary modelState, string[] permittedExtensions,
             long sizeLimit)

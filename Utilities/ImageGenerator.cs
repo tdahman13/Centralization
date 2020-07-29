@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace Centralization
+namespace Centralization.Utilities
 {
     public class ImageGenerator
     {
