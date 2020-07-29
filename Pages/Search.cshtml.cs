@@ -12,7 +12,7 @@ namespace Centralization.Pages
     public class SearchModel : PageModel
     {
         private readonly IntermentContext _context;
-        public List<Interment> interments;
+        public Interment interment;
         public List<SelectListItem> cemeteries = Cemeteries.cemeteriesSelectList;
 
         public SearchModel(IntermentContext context)
@@ -22,8 +22,7 @@ namespace Centralization.Pages
 
         public void OnGet()
         {
-            Interment emptyInterred = new Interment();
-            interments = new List<Interment> { emptyInterred };
+            interment = new Interment();
             //interments = await _context.Interments.Take(100).ToListAsync();
         }
 

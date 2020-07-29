@@ -36,5 +36,41 @@ namespace Centralization.Utilities
             bitmap.Dispose();
             return images;
         }
+
+        //public static byte[] TiffToPdf(string path)
+        //{
+        //    // creation of the document with a certain size and certain margins
+        //    MemoryStream ms = new MemoryStream();
+        //    iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 0, 0, 0, 0);
+
+        //    // Creation of the different writers
+        //    PdfWriter writer = PdfWriter.GetInstance(document, ms);
+
+        //    // Load the tiff image and count the total number of pages
+        //    Bitmap bmp = new Bitmap(path);
+        //    int total = bmp.GetFrameCount(FrameDimension.Page);
+
+        //    document.Open();
+        //    PdfContentByte cb = writer.DirectContent;
+        //    for (int k = 0; k < total; ++k)
+        //    {
+        //        bmp.SelectActiveFrame(FrameDimension.Page, k);
+        //        iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(bmp, ImageFormat.Bmp);
+        //        // Scale the image to fit in the page
+        //        img.ScalePercent(72f / img.DpiX * 100);
+        //        img.SetAbsolutePosition(0, 0);
+        //        cb.AddImage(img);
+        //        document.NewPage();
+        //    }
+
+        //    //Flushing memory
+        //    bmp.Dispose();
+        //    writer.Flush();
+        //    document.Close();
+        //    document.Dispose();
+
+        //    byte[] pdf = ms.ToArray();
+        //    return pdf;
+        //}
     }
 }

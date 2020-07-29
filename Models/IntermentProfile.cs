@@ -9,6 +9,7 @@ namespace Centralization.Models
         public List<string> IntermentOrderImages { get; }
         public List<string> EasementImages { get; }
         public List<string> LotCardImages { get; }
+        public List<string> IntermentCardImages { get; }
 
         public IntermentProfile(Interment interred)
         {
@@ -16,6 +17,7 @@ namespace Centralization.Models
             IntermentOrderImages = ImageGenerator.TiffToImages(interred.IOFullPath);
             EasementImages = ImageGenerator.TiffToImages(interred.EbFullPath);
             LotCardImages = ImageGenerator.TiffToImages(interred.LCFullPath);
+            IntermentCardImages = ImageGenerator.TiffToImages(interred.ICFullPath);
         }
     }
 }
