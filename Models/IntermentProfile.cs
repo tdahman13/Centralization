@@ -31,8 +31,11 @@ namespace Centralization.Models
             
             if(string.IsNullOrEmpty(interred.EbTifPath) || string.IsNullOrEmpty(interred.EbTifName))
             {
-                string backupPath = pg.GetEasementPathBackup(interred);
-                EasementImages = ImageGenerator.TiffToImages(backupPath);
+                if (!string.IsNullOrEmpty(interred.EasementNo))
+                {
+                    string backupPath = pg.GetEasementPathBackup(interred);
+                    EasementImages = ImageGenerator.TiffToImages(backupPath);
+                }
             }
             else
             {
@@ -64,7 +67,9 @@ namespace Centralization.Models
                 && interred.CemNo.Equals(x.Cemid))
                 .FirstOrDefault();
 
-            string path = interred.IOFullPath + intermentOrder.Tifpath + intermentOrder.Iotif;
+            string path = interred.IOFullPath;
+            if (intermentOrder != null)
+                path = path + intermentOrder.Tifpath + intermentOrder.Iotif;
             return path;
         }
 
@@ -75,7 +80,9 @@ namespace Centralization.Models
                 && interred.IDate == x.Date)
                 .FirstOrDefault();
 
-            string path = interred.EbFullPath + easement.Tifpath + easement.Ebtif;
+            string path = interred.EbFullPath;
+            if (easement != null)
+                path = path + easement.Tifpath + easement.Ebtif;
             return path;
         }
 
@@ -87,10 +94,19 @@ namespace Centralization.Models
                 && interred.CemNo.Equals(x.CemNum))
                 .FirstOrDefault().LotCardId;
 
-            var lotCard = _context.LotCards.Find(lotCardID);
+            if (lotCardID != null)
+            {
+                var lotCard = _context.LotCards.Where(
+                    x => lotCardID == x.Id && interred.LotTier.Equals(x.Lot)
+                    && interred.BlockBuilding.Equals(x.Block) && interred.SectionLocation.Equals(x.Section)
+                    && interred.CemNo.Equals(x.Cemid))
+                    .FirstOrDefault();
+                if (lotCard != null)
+                    return interred.LCFullPath + lotCard.Tifpath + lotCard.Lctif;
+                return interred.LCFullPath;
+            }
 
-            string path = interred.LCFullPath + lotCard.Tifpath + lotCard.Lctif;
-            return path;
+            return interred.LCFullPath;
         }
     }
 }

@@ -297,13 +297,13 @@ namespace Centralization.DAL
 
                 //entity.Property(e => e.Badscan).HasColumnName("BADSCAN");
 
-                //entity.Property(e => e.Block)
-                //    .HasColumnName("BLOCK")
-                //    .HasMaxLength(255);
+                entity.Property(e => e.Block)
+                    .HasColumnName("BLOCK")
+                    .HasMaxLength(255);
 
-                //entity.Property(e => e.Cemid)
-                //    .HasColumnName("CEMID")
-                //    .HasMaxLength(255);
+                entity.Property(e => e.Cemid)
+                    .HasColumnName("CEMID")
+                    .HasMaxLength(255);
 
                 //entity.Property(e => e.Checked).HasColumnName("CHECKED");
 
@@ -329,9 +329,9 @@ namespace Centralization.DAL
                     .HasColumnName("LCTIF")
                     .HasMaxLength(255);
 
-                //entity.Property(e => e.Lot)
-                //    .HasColumnName("LOT")
-                //    .HasMaxLength(255);
+                entity.Property(e => e.Lot)
+                    .HasColumnName("LOT")
+                    .HasMaxLength(255);
 
                 //entity.Property(e => e.Missing).HasColumnName("MISSING");
 
@@ -341,9 +341,9 @@ namespace Centralization.DAL
                 //    .HasColumnName("SCANDATE")
                 //    .HasColumnType("datetime");
 
-                //entity.Property(e => e.Section)
-                //    .HasColumnName("SECTION")
-                //    .HasMaxLength(255);
+                entity.Property(e => e.Section)
+                    .HasColumnName("SECTION")
+                    .HasMaxLength(255);
 
                 //entity.Property(e => e.Sequence).HasColumnName("SEQUENCE");
 

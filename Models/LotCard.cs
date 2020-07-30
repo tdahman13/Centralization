@@ -6,10 +6,10 @@
         //public int? Lcid { get; set; }
         public string Lctif { get; set; }
         public string Tifpath { get; set; }
-        //public string Lot { get; set; }
-        //public string Block { get; set; }
-        //public string Section { get; set; }
-        //public string Cemid { get; set; }
+        public string Lot { get; set; }
+        public string Block { get; set; }
+        public string Section { get; set; }
+        public string Cemid { get; set; }
         //public DateTime? Scandate { get; set; }
         //public bool Badscan { get; set; }
         //public bool Garbage { get; set; }
