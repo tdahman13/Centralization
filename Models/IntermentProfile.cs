@@ -1,5 +1,6 @@
 ﻿using Centralization.DAL;
 using Centralization.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,13 +31,11 @@ namespace Centralization.Models
                 IntermentOrderImages = ImageGenerator.TiffToImages(interred.IOFullPath);
             }
             
-            if(string.IsNullOrEmpty(interred.EbTifPath) || string.IsNullOrEmpty(interred.EbTifName))
+            if((string.IsNullOrEmpty(interred.EbTifPath) || string.IsNullOrEmpty(interred.EbTifName))
+                && !string.IsNullOrEmpty(interred.EasementNo))
             {
-                if (!string.IsNullOrEmpty(interred.EasementNo))
-                {
-                    string backupPath = pg.GetEasementPathBackup(interred);
-                    EasementImages = ImageGenerator.TiffToImages(backupPath);
-                }
+                string backupPath = pg.GetEasementPathBackup(interred);
+                EasementImages = ImageGenerator.TiffToImages(backupPath);
             }
             else
             {
@@ -99,12 +98,12 @@ namespace Centralization.Models
                 x => interred.GraveCrypt.Equals(x.Grave) && interred.LotTier.Equals(x.Lot)
                 && interred.BlockBuilding.Equals(x.Block) && interred.SectionLocation.Equals(x.Section)
                 && interred.CemNo.Equals(x.CemNum))
-                .FirstOrDefault().LotCardId;
+                .FirstOrDefault();
 
             if (lotCardID != null)
             {
                 var lotCard = _context.LotCards.Where(
-                    x => lotCardID == x.Id && interred.LotTier.Equals(x.Lot)
+                    x => lotCardID.LotCardId == x.Id && interred.LotTier.Equals(x.Lot)
                     && interred.BlockBuilding.Equals(x.Block) && interred.SectionLocation.Equals(x.Section)
                     && interred.CemNo.Equals(x.Cemid))
                     .FirstOrDefault();
@@ -118,14 +117,17 @@ namespace Centralization.Models
 
         public string GetDocumentsPath(Interment interred)
         {
+
             var document = _context.DocFiles.Where(
-                x => interred.GraveCrypt.Equals(x.Gravehigh) && interred.GraveCrypt.Equals(x.Gravelow)
-                && interred.LotTier.Equals(x.Lot) & interred.BlockBuilding.Equals(x.Block)
-                && interred.SectionLocation.Equals(x.Section) && interred.CemNo.Equals(x.Cemid))
+                x => interred.LotTier.Equals(x.Lot) & interred.BlockBuilding.Equals(x.Block)
+                && interred.SectionLocation.Equals(x.Section) && interred.CemNo.Equals(x.Cemid)
+                //&& Convert.ToInt32(interred.GraveCrypt) >= Convert.ToInt32(x.Gravelow)
+                //&& Convert.ToInt32(interred.GraveCrypt) <= Convert.ToInt32(x.Gravehigh)
+                && (interred.GraveCrypt.Equals(x.Gravehigh) || interred.GraveCrypt.Equals(x.Gravelow)))
                 .FirstOrDefault();
 
             if (document != null)
-                return @"\\imageserver\CemeteryDocuments\" + document.Tifpath + document.Dftif;
+                return @"\\imageserver\CemeteryDocuments\" + interred.ParentCemName + document.Tifpath + document.Dftif;
             return string.Empty;
         }
     }

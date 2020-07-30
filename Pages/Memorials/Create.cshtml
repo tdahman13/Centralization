@@ -11,11 +11,11 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" id="createForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="MemorialApplication.Type" class="control-label"></label>
-                <select asp-for="MemorialApplication.Type" class="form-control" 
+                <select asp-for="MemorialApplication.Type" class="form-control"
                         asp-items="Html.GetEnumSelectList<ApplicationType>()"></select>
                 <span asp-validation-for="MemorialApplication.Type" class="text-danger"></span>
             </div>
@@ -36,12 +36,35 @@
                 <span asp-validation-for="MemorialApplication.CemNo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FileUpload"></label>
-                <input asp-for="FileUpload" type="file" required/>
-                <span asp-validation-for="FileUpload"></span>
+                <label asp-for="FileUpload" class="control-label">File Upload</label>
+                <input asp-for="FileUpload" class="form-control" type="file" required />
+                <span asp-validation-for="FileUpload" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success" id="submitBtn">
+                Create
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmModalLongTitle">Confirm Application</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
@@ -56,4 +79,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="@Url.Content("~/js/createApplication.js")" type="text/javascript"></script>
 }
