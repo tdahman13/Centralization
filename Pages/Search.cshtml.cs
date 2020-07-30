@@ -69,7 +69,7 @@ namespace Centralization.Pages
             return new JsonResult(result);
         }
 
-        public PartialViewResult OnGetData(int idf, string cemNo)
+        public IActionResult OnGetData(int idf, string cemNo)
         {
             if (cemNo.Length == 1)
             {
@@ -77,12 +77,8 @@ namespace Centralization.Pages
             }
             var interment = _context.Interments.Find(new object[] { idf, cemNo });
             var intermentProfile = new IntermentProfile(interment);
-            //return new JsonResult(interment);
-            return new PartialViewResult
-            {
-                ViewName = "_IntermentPartial",
-                ViewData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<IntermentProfile>(ViewData, intermentProfile)
-            };
+
+            return Partial("_intermentPartial", intermentProfile);
         }
 
         public IActionResult OnGetSearchLocation(string cemetery, string grave, string lot, string block, string section)

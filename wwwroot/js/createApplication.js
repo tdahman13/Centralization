@@ -23,6 +23,5 @@
 
     $("#FileUpload").on("change", function () {
         $("#createForm").valid();
-        console.log("shit");
     })
 });
