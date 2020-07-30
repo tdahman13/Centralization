@@ -12,6 +12,7 @@ namespace Centralization.Models
         public List<string> EasementImages { get; }
         public List<string> LotCardImages { get; }
         public List<string> IntermentCardImages { get; }
+        public List<string> DocumentImages { get; }
 
         public IntermentProfile(Interment interred)
         {
@@ -50,7 +51,13 @@ namespace Centralization.Models
             else
             {
                 LotCardImages = ImageGenerator.TiffToImages(interred.LCFullPath);
-            }            
+            }
+
+            string documentPath = pg.GetDocumentsPath(interred);
+            if (!string.IsNullOrEmpty(documentPath))
+                DocumentImages = ImageGenerator.TiffToImages(documentPath);
+            else
+                DocumentImages = new List<string>();
         }
     }
 
@@ -107,6 +114,19 @@ namespace Centralization.Models
             }
 
             return interred.LCFullPath;
+        }
+
+        public string GetDocumentsPath(Interment interred)
+        {
+            var document = _context.DocFiles.Where(
+                x => interred.GraveCrypt.Equals(x.Gravehigh) && interred.GraveCrypt.Equals(x.Gravelow)
+                && interred.LotTier.Equals(x.Lot) & interred.BlockBuilding.Equals(x.Block)
+                && interred.SectionLocation.Equals(x.Section) && interred.CemNo.Equals(x.Cemid))
+                .FirstOrDefault();
+
+            if (document != null)
+                return @"\\imageserver\CemeteryDocuments\" + document.Tifpath + document.Dftif;
+            return string.Empty;
         }
     }
 }

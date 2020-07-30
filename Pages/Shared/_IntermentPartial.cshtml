@@ -63,7 +63,7 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <a href="#" class="with-caption image-link" data-mfp-src="@Model.IntermentOrderImages.ElementAt(0)" data->
-                                    <img src="@Model.IntermentOrderImages.ElementAt(0)" class="d-block w-100 my-image" alt="..." id="IOimage0" />
+                                    <img src="@Model.IntermentOrderImages.ElementAt(0)" class="d-block w-100 my-image" alt="..." id="IOImage0" />
                                 </a>
                             </div>
 
@@ -71,7 +71,7 @@
                             {
                                 <div class="carousel-item">
                                     <a href="#" class="with-caption image-link" data-mfp-src="@Model.IntermentOrderImages.ElementAt(i)">
-                                        <img src="@Model.IntermentOrderImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("IOimage{0}", i+1)" />
+                                        <img src="@Model.IntermentOrderImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("IOImage{0}", i+1)" />
                                     </a>
                                 </div>
                             }
@@ -112,7 +112,7 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <a href="#" class="with-caption image-link" data-mfp-src="@Model.EasementImages.ElementAt(0)" data->
-                                    <img src="@Model.EasementImages.ElementAt(0)" class="d-block w-100 my-image" alt="..." id="EBimage0" />
+                                    <img src="@Model.EasementImages.ElementAt(0)" class="d-block w-100 my-image" alt="..." id="EBImage0" />
                                 </a>
                             </div>
 
@@ -120,7 +120,7 @@
                             {
                                 <div class="carousel-item">
                                     <a href="#" class="with-caption image-link" data-mfp-src="@Model.EasementImages.ElementAt(i)">
-                                        <img src="@Model.EasementImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("EBimage{0}", i+1)" />
+                                        <img src="@Model.EasementImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("EBImage{0}", i+1)" />
                                     </a>
                                 </div>
                             }
@@ -161,7 +161,7 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <a href="#" class="with-caption image-link" data-mfp-src="@Model.LotCardImages.ElementAt(0)" data->
-                                    <img src="@Model.LotCardImages.ElementAt(0)" class="d-block w-100 my-image" alt="..." id="LCimage0" />
+                                    <img src="@Model.LotCardImages.ElementAt(0)" class="d-block w-100 my-image" alt="..." id="LCImage0" />
                                 </a>
                             </div>
 
@@ -169,7 +169,7 @@
                             {
                                 <div class="carousel-item">
                                     <a href="#" class="with-caption image-link" data-mfp-src="@Model.LotCardImages.ElementAt(i)">
-                                        <img src="@Model.LotCardImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("LCimage{0}", i+1)" />
+                                        <img src="@Model.LotCardImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("LCImage{0}", i+1)" />
                                     </a>
                                 </div>
                             }
@@ -193,7 +193,7 @@
                 <h5>Interment Card</h5>
                 @if (Model.IntermentCardImages.Count == 0)
                 {
-                    <p class="alert alert-danger">No Results Were Found</p>
+                    <p class="alert alert-danger">No Interment Cards Were Found</p>
                 }
                 else
                 {
@@ -211,7 +211,7 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <a href="#" class="with-caption image-link" data-mfp-src="@Model.IntermentCardImages.ElementAt(0)" data->
-                                    <img src="@Model.IntermentCardImages.ElementAt(0)" class="d-block w-100 my-image" alt="..." id="LCimage0" />
+                                    <img src="@Model.IntermentCardImages.ElementAt(0)" class="d-block w-100 my-image" alt="..." id="ICImage0" />
                                 </a>
                             </div>
 
@@ -219,7 +219,7 @@
                             {
                                 <div class="carousel-item">
                                     <a href="#" class="with-caption image-link" data-mfp-src="@Model.IntermentCardImages.ElementAt(i)">
-                                        <img src="@Model.IntermentCardImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("LCimage{0}", i+1)" />
+                                        <img src="@Model.IntermentCardImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("ICImage{0}", i+1)" />
                                     </a>
                                 </div>
                             }
@@ -239,9 +239,54 @@
                 }
             </div>
             <div class="col-md-6">
+                <h5>Documents</h5>
+                @if (Model.DocumentImages.Count == 0)
+                {
+                    <p class="alert alert-danger">No Documents Were Found</p>
+                }
+                else
+                {
+                    <div id="DocImagesCarousel" class="carousel slide" data-ride="carousel">
+                        @if (Model.DocumentImages.Count > 1)
+                        {
+                            <ol class="carousel-indicators">
+                                <li data-target="#DocImagesCarousel" data-slide-to="0" class="active"></li>
+                                @for (int i = 1; i < Model.DocumentImages.Count; i++)
+                                {
+                                    <li data-target="#DocImagesCarousel" data-slide-to="@i"></li>
+                                }
+                            </ol>
+                        }
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="#" class="with-caption image-link" data-mfp-src="@Model.DocumentImages.ElementAt(0)" data->
+                                    <img src="@Model.DocumentImages.ElementAt(0)" class="d-block w-100 my-image" alt="..." id="DocImage0" />
+                                </a>
+                            </div>
 
+                            @for (int i = 1; i < Model.DocumentImages.Count; i++)
+                            {
+                                <div class="carousel-item">
+                                    <a href="#" class="with-caption image-link" data-mfp-src="@Model.DocumentImages.ElementAt(i)">
+                                        <img src="@Model.DocumentImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("DocImage{0}", i+1)" />
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                        @if (Model.DocumentImages.Count > 1)
+                        {
+                            <a class="carousel-control-prev" href="#DocImagesCarousel" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#DocImagesCarousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        }
+                    </div>
+                }
             </div>
-
         </div>
     </div>
 </div>
