@@ -20,7 +20,7 @@
 
     <div class="form-row" id="name-search-form">
         @Html.Label("Cemetery", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "cemeterySearch" })
-        @Html.DropDownList("cemeterySearch", Model.cemeteries, "Select Cemetery...", new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3" })
+        @Html.DropDownList("cemeterySearch", Model.cemeteries, null, new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3" })
         @Html.Label("Name (Last, First)", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "searchName" })
         @Html.TextBox("searchName", null,
         new { @class = "form-control col-12 col-md-9 md-2 mb-md-3", @placeholder = "Last name, First name..." })
@@ -77,5 +77,6 @@
 </div>
 
 @section Scripts {
+    <partial name="_MagnificScriptsPartial" />
     <script src="@Url.Content("~/js/GetNames.js")" type="text/javascript"></script>
 }
