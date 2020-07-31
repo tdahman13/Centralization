@@ -37,7 +37,7 @@
 
     <div class="form-row" id="location-search-form" style="display:none;">
         @Html.LabelFor(model => model.interment.CemName, null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "cemetery" })
-        @Html.DropDownList("cemetery", Model.cemeteries, "Select Cemetery...", new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3" })
+        @Html.DropDownList("cemetery", Model.cemeteries, null, new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3" })
         <div class="col-12 col-md-2">
             @Html.LabelFor(model => model.interment.GraveCrypt, null, htmlAttributes: new { @class = "col-form-label", @for = "grave" })
             @Html.TextBoxFor(model => model.interment.GraveCrypt, null, new { @class = "form-control", @placeholder = "Grave", @id = "grave" })

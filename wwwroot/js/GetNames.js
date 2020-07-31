@@ -115,7 +115,7 @@
 
     // Reset Location Form
     $("#reset-btn").on("click", function () {
-        $("#cemetery").val("");
+        $("#cemetery").val("05");
         $("#grave").val("");
         $("#lot").val("");
         $("#block").val("");
