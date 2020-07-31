@@ -93,10 +93,10 @@
             },
             success: function (data) {
                 var divToReplace = $("#location-search-results");
-                var orderedList = $("<ul>").append("Result Count: " + data.length).appendTo(divToReplace);
+                var orderedList = $("<ul class='resultList'>").append("Result Count: " + data.length).appendTo(divToReplace);
                 $.each(data, function (i, item) {
                     var params = item.idf + ", " + item.cemNo;
-                    var $tr = $("<li onClick='getData(" + params + ")'>").append(item.label).appendTo(orderedList);
+                    var $tr = $("<li class='resultListItem' onClick='getData(" + params + ")'>").append(item.label).appendTo(orderedList);
                 });
             },
             error: function (response) {

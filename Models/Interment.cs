@@ -100,9 +100,9 @@ namespace Centralization.Models
         {
             get
             {
-                return string.Format("{0} {1} - G: {2} | L: {3} | B: {4} | S: {5} => Buried {6} at {7}",
+                return string.Format("{0}, {1} - G: {2} | L: {3} | B: {4} | S: {5} => Buried {6}",
                     LastName, FirstName, GraveCrypt, LotTier, BlockBuilding, SectionLocation,
-                    IDate?.ToString("MM/dd/yyyy"), CemName);
+                    IDate?.ToString("MM/dd/yyyy"));
             }
         }
     }

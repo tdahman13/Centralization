@@ -90,7 +90,7 @@ dl {
 }
 
 
-/*** Page ***/
+/*** Location Results ***/
 #location-search-results {
     background-color: #fff;
     max-height: 11rem;
@@ -98,10 +98,16 @@ dl {
     margin: 2rem 0rem 0rem 0rem;
 }
 
-ul{
+.resultList {
     font-weight: 800;
 }
 
-li{
-    font-weight: 500;
+.resultListItem {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.resultListItem:hover {
+    background-color: #1b6ec2;
+    cursor: pointer;
 }
