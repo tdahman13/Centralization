@@ -11,5 +11,6 @@ namespace Centralization.DAL
         }
 
         public DbSet<MemorialApplication> MemorialApplication { get; set; }
+        public DbSet<LinkedInterment> LinkedInterments { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using Centralization.Utilities;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Centralization.Pages.Applications
 {
@@ -84,10 +85,27 @@ namespace Centralization.Pages.Applications
                 //await FileUpload.CopyToAsync(fileStream);
             }
 
+            // Linked Interments
+            var inter1 = new LinkedInterment
+            {
+                CemNo = "05",
+                Idf = 123
+            };
+            var inter2 = new LinkedInterment
+            {
+                CemNo = "05",
+                Idf = 111
+            };
+            List<LinkedInterment> interments = new List<LinkedInterment>
+            {
+                inter1, inter2
+            };
+
             // Set and Save Application in DB
             MemorialApplication.FilePath = MemorialApplication.GetPath();
             MemorialApplication.FileName = trustedFileNameForFileStorage;
             MemorialApplication.UploadDate = DateTime.Now;
+            MemorialApplication.LinkedInterments = interments;
             _context.MemorialApplication.Add(MemorialApplication);
             await _context.SaveChangesAsync();
 

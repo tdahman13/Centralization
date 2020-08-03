@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Centralization.Models
@@ -26,10 +27,10 @@ namespace Centralization.Models
         [Display(Name = "Uploaded By")]
         public string UploadedBy { get; set; }
 
-        public int Idf { get; set; }
-
         [Display(Name = "Cemetery")]
         public string CemNo { get; set; }
+
+        public List<LinkedInterment> LinkedInterments { get; set; }
 
         public string GetPath()
         {
