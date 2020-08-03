@@ -68,6 +68,10 @@
                 </div>
             </div>
 
+            <div style="display:none" id="loading-image" class="col-12 align-middle mt-4">
+                <img src="@Url.Content("~/circle.gif")" class="rounded mx-auto d-block img-fluid" alt="loading"
+                     width="150" height="150">
+            </div>
             <div id="location-search-results" class="row">
 
             </div>
@@ -97,6 +101,23 @@
                 <label asp-for="FileUpload" class="control-label">File Upload</label>
                 <input asp-for="FileUpload" class="form-control" type="file" required />
                 <span asp-validation-for="FileUpload" class="text-danger"></span>
+            </div>
+
+            <div id="relatedFormInput">
+                @*<div class="form-group">
+                    <label asp-for="MemorialApplication.LinkedInterments[0].Idf" class="control-label"></label>
+                    <input asp-for="MemorialApplication.LinkedInterments[0].Idf" class="form-control" />
+                    <span asp-validation-for="MemorialApplication.LinkedInterments[0].Idf" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MemorialApplication.LinkedInterments[0].CemNo" class="control-label"></label>
+                    <input asp-for="MemorialApplication.LinkedInterments[0].CemNo" class="form-control" />
+                    <span asp-validation-for="MemorialApplication.LinkedInterments[0].CemNo" class="text-danger"></span>
+                </div>*@
+            </div>
+
+            <div id="relatedDeadDisplay">
+
             </div>
 
             <!-- Button trigger modal -->

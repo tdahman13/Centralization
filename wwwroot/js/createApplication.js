@@ -1,28 +1,6 @@
 ﻿$(document).ready(function () {
     "Use Strict";
 
-    // Before modal shows, show form details in body
-    $("#confirmModal").on("show.hidden.bs.modal", function (e) {
-        var type = $("#MemorialApplication_Type option:selected").text();
-        var uploadBy = $("#MemorialApplication_UploadedBy").val();
-        var cem = $("#MemorialApplication_CemNo option:selected").text();
-
-        var html = "<dl class='row'><dt class='col-sm-4'>Application Type</dt><dd class='col-sm-8'>" + type
-            + "</dd><dt class='col-sm-4'>Uploaded By</dt><dd class='col-sm-8'>" + uploadBy
-            + "</dd><dt class='col-sm-4'>Cemetery</dt><dd class='col-sm-8'>" + cem + "</dd></dl>";
-        $(".modal-body").html(html);
-    })
-
-    $("#submitBtn").on("click", function (e) {
-        if ($("#createForm").valid()) {
-            $("#confirmModal").modal("show");
-        } 
-    })
-
-    $("#FileUpload").on("change", function () {
-        $("#createForm").valid();
-    })
-
     // Hide name-search, show location-search
     $("#search-by-location-btn").on("click", function () {
         if ($("#name-search-form").is(":visible")) {
@@ -42,6 +20,52 @@
             $("#name-search-form").show();
             $("#location-search-results").hide();
         }
+    });
+
+    $("#submitBtn").on("click", function (e) {
+        if ($("#createForm").valid()) {
+            $("#confirmModal").modal("show");
+        }
+    });
+
+    $("#FileUpload").on("change", function () {
+        $("#createForm").valid();
+    });
+
+    // On cemetery selectlist change, reset related interred
+    $("#MemorialApplication_CemNo, #cemeterySearch, #cemetery").on("change", function () {
+        var cem = $(this).val();
+        $("#MemorialApplication_CemNo, #cemeterySearch, #cemetery").val(cem);
+        $("#relatedDeadDisplay").empty();
+    });
+
+    // Before modal shows, show form details in body
+    $("#confirmModal").on("show.hidden.bs.modal", function (e) {
+        var relatedSection = $("#relatedFormInput");
+        relatedSection.empty();
+        // Set up related Interments
+        var n = 0;
+        $(".dead").each(function () {
+            var dead = $(this);
+            var cem = dead.data('cemno');
+            var idf = dead.data('idf');
+            var inputCemNo = $("<input>").attr("type", "hidden")
+                .attr("name", "MemorialApplication.LinkedInterments[" + n + "].CemNo").val(cem);
+            var inputIdf = $("<input>").attr("type", "hidden")
+                .attr("name", "MemorialApplication.LinkedInterments[" + n + "].Idf").val(idf);
+            relatedSection.append(inputCemNo);
+            relatedSection.append(inputIdf);
+            n++;
+        })
+
+        var type = $("#MemorialApplication_Type option:selected").text();
+        var uploadBy = $("#MemorialApplication_UploadedBy").val();
+        var cem = $("#MemorialApplication_CemNo option:selected").text();
+
+        var html = "<dl class='row'><dt class='col-sm-4'>Application Type</dt><dd class='col-sm-8'>" + type
+            + "</dd><dt class='col-sm-4'>Uploaded By</dt><dd class='col-sm-8'>" + uploadBy
+            + "</dd><dt class='col-sm-4'>Cemetery</dt><dd class='col-sm-8'>" + cem + "</dd></dl>";
+        $(".modal-body").html(html);
     });
 
     // Autocomplete for finding interred (Two Names)
@@ -67,7 +91,10 @@
         select: function (event, ui) {
             var idf = ui.item.idf;
             var cemNo = ui.item.cemNo;
-            //getData(idf, cemNo);
+            // Check if already selected or different cemetery
+            var p = $("<p class='dead'>" + ui.item.label + "</p>")
+                .attr('data-cemNo', cemNo).attr('data-idf', idf);
+            $("#relatedDeadDisplay").append(p);
         }
     });
 
@@ -94,7 +121,9 @@
         select: function (event, ui) {
             var idf = ui.item.idf;
             var cemNo = ui.item.cemNo;
-            //getData(idf, cemNo);
+            var p = $("<p class='dead'>" + ui.item.label + "</p>")
+                .attr('data-cemNo', cemNo).attr('data-idf', idf);
+            $("#relatedDeadDisplay").append(p);
         }
     });
 
@@ -115,10 +144,12 @@
             },
             success: function (data) {
                 var divToReplace = $("#location-search-results");
-                var orderedList = $("<ul class='resultList'>").append("Result Count: " + data.length).appendTo(divToReplace);
+                var orderedList = $("<ul class='resultList'>").append("Result Count: " + data.length)
+                    .appendTo(divToReplace);
                 $.each(data, function (i, item) {
-                    var params = item.idf + ", " + item.cemNo;
-                    var $tr = $("<li class='resultListItem' onClick='getData(" + params + ")'>").append(item.label).appendTo(orderedList);
+                    var params = item.idf + ", " + item.cemNo + ", " + JSON.stringify(item.label);
+                    var $tr = $("<li class='resultListItem' onClick='addToDeadList(" + params + ")'>")
+                        .append(item.label).appendTo(orderedList);
                 });
             },
             error: function (response) {
@@ -164,4 +195,11 @@ function showFail(msg) {
     "use strict";
     $("#partialGoesHere").html("<div class='alert alert-danger'>" + msg + "</div>");
     $("#loading-image").hide();
+}
+
+function addToDeadList(idf, cemNo, label) {
+    // Check if already selected or different cemetery
+    var p = $("<p class='dead'>" + label + "</p>")
+        .attr('data-cemNo', cemNo).attr('data-idf', idf);
+    $("#relatedDeadDisplay").append(p);
 }
