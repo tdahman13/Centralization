@@ -23,7 +23,7 @@ namespace Centralization.Pages.Applications
 
         public async Task OnGetAsync()
         {
-            MemorialApplication = await _context.MemorialApplication.ToListAsync();
+            MemorialApplication = await _context.MemorialApplications.ToListAsync();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Centralization.Pages.Applications
                 return NotFound();
             }
 
-            MemorialApplication = await _context.MemorialApplication.FirstOrDefaultAsync(m => m.ID == id);
+            MemorialApplication = await _context.MemorialApplications.FirstOrDefaultAsync(m => m.ID == id);
 
             if (MemorialApplication == null)
             {
@@ -71,7 +71,7 @@ namespace Centralization.Pages.Applications
 
         private bool MemorialApplicationExists(int id)
         {
-            return _context.MemorialApplication.Any(e => e.ID == id);
+            return _context.MemorialApplications.Any(e => e.ID == id);
         }
     }
 }

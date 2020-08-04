@@ -89,7 +89,7 @@ namespace Centralization.Pages.Applications
             MemorialApplication.FilePath = MemorialApplication.GetPath();
             MemorialApplication.FileName = trustedFileNameForFileStorage;
             MemorialApplication.UploadDate = DateTime.Now;
-            _context.MemorialApplication.Add(MemorialApplication);
+            _context.MemorialApplications.Add(MemorialApplication);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

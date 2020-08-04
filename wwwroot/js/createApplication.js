@@ -43,6 +43,7 @@
         var cem = $(this).val();
         $("#MemorialApplication_CemNo, #cemeterySearch, #cemetery").val(cem);
         $("#relatedDeadDisplay").empty();
+        $("#location-search-results").empty();
     });
 
     // Before modal shows, show form details in body
@@ -151,7 +152,7 @@
         }
     });
 
-    // Get names by location
+    // Search Names by location
     $("#location-search-btn").on("click", function () {
         var cem = $("#cemetery").val();
         var grave = $("#grave").val();
@@ -192,11 +193,11 @@
 
     // Reset Location Form
     $("#reset-btn").on("click", function () {
-        $("#cemetery").val("05");
         $("#grave").val("");
         $("#lot").val("");
         $("#block").val("");
         $("#section").val("");
+        $("#location-search-results").empty();
     });
 });
 
@@ -222,9 +223,10 @@ function showFail(msg) {
 }
 
 function addToDeadList(obj) {
-    var idf = $(obj).data("cemNo");
-    var cemNo = $(obj).data("idf");
+    var idf = $(obj).data("idf");
+    var cemNo = $(obj).data("cemno");
     var label = $(obj).text();
+    console.log(idf + " " + cemNo);
 
     // Check if already selected or different cemetery
     if (!canDisplayDead(idf, cemNo))
@@ -233,7 +235,7 @@ function addToDeadList(obj) {
     $("span[data-valmsg-for='MemorialApplication.LinkedInterments']").text('');
     var btn = $("<button class='btn bg-transparent' type='button' onclick='removeFromList(this)'>").text("x");
     var p = $("<p class='dead'>" + label + "</p>")
-        .attr('data-cemNo', cemNo).attr('data-idf', idf).append(btn);
+        .attr('data-cemno', cemNo).attr('data-idf', idf).append(btn);
     $("#relatedDeadDisplay").append(p);
 }
 

@@ -29,7 +29,7 @@ namespace Centralization.Pages.Applications
                 return NotFound();
             }
 
-            MemorialApplication = await _context.MemorialApplication.FirstOrDefaultAsync(m => m.ID == id);
+            MemorialApplication = await _context.MemorialApplications.FirstOrDefaultAsync(m => m.ID == id);
 
             if (MemorialApplication == null)
             {
@@ -45,11 +45,11 @@ namespace Centralization.Pages.Applications
                 return NotFound();
             }
 
-            MemorialApplication = await _context.MemorialApplication.FindAsync(id);
+            MemorialApplication = await _context.MemorialApplications.FindAsync(id);
 
             if (MemorialApplication != null)
             {
-                _context.MemorialApplication.Remove(MemorialApplication);
+                _context.MemorialApplications.Remove(MemorialApplication);
                 await _context.SaveChangesAsync();
             }
 
