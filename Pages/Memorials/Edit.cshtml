@@ -47,6 +47,14 @@
             </div>
         </form>
     </div>
+
+    <div class="col-md-7 offset-md-1">
+        <h4>Interments</h4>
+        @foreach(var interred in Model.Interments)
+        {
+            <p>@interred.Label</p>
+        }
+    </div>
 </div>
 
 <div>

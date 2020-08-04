@@ -49,6 +49,14 @@
             @Html.DisplayFor(model => Centralization.Models.Cemeteries.cems[Model.MemorialApplication.CemNo])
         </dd>
     </dl>
+
+    <div class="row">
+        <h3 class="col-12">Interments</h3>
+        @foreach(var interred in Model.Interments)
+        {
+            <p class="col-md-12">@interred.Label</p>
+        }
+    </div>
     
     <form method="post">
         <input type="hidden" asp-for="MemorialApplication.MemorialApplicationID" />

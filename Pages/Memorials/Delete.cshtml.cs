@@ -12,15 +12,18 @@ namespace Centralization.Pages.Applications
 {
     public class DeleteModel : PageModel
     {
-        private readonly Centralization.DAL.MemorialContext _context;
+        private readonly MemorialContext _memorialContext;
+        private readonly IntermentContext _intermentContext;
 
-        public DeleteModel(Centralization.DAL.MemorialContext context)
+        public DeleteModel(MemorialContext memorialContext, IntermentContext intermentContext)
         {
-            _context = context;
+            _memorialContext = memorialContext;
+            _intermentContext = intermentContext;
         }
 
         [BindProperty]
         public MemorialApplication MemorialApplication { get; set; }
+        public List<Interment> Interments { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,11 +32,21 @@ namespace Centralization.Pages.Applications
                 return NotFound();
             }
 
-            MemorialApplication = await _context.MemorialApplications.FirstOrDefaultAsync(m => m.MemorialApplicationID == id);
+            MemorialApplication = await _memorialContext.MemorialApplications
+                .Include(m => m.LinkedInterments).AsNoTracking()
+                .FirstOrDefaultAsync(m => m.MemorialApplicationID == id);
 
             if (MemorialApplication == null)
             {
                 return NotFound();
+            }
+
+            Interments = new List<Interment>();
+            foreach(var interred in MemorialApplication.LinkedInterments)
+            {
+                var interment = await _intermentContext.Interments
+                    .FindAsync(new object[] { interred.Idf, interred.CemNo });
+                Interments.Add(interment);
             }
             return Page();
         }
@@ -45,12 +58,12 @@ namespace Centralization.Pages.Applications
                 return NotFound();
             }
 
-            MemorialApplication = await _context.MemorialApplications.FindAsync(id);
+            MemorialApplication = await _memorialContext.MemorialApplications.FindAsync(id);
 
             if (MemorialApplication != null)
             {
-                _context.MemorialApplications.Remove(MemorialApplication);
-                await _context.SaveChangesAsync();
+                _memorialContext.MemorialApplications.Remove(MemorialApplication);
+                await _memorialContext.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");

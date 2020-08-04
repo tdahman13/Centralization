@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,14 +10,17 @@ namespace Centralization.Pages.Applications
 {
     public class DetailsModel : PageModel
     {
-        private readonly Centralization.DAL.MemorialContext _context;
+        private readonly MemorialContext _memorialContext;
+        private readonly IntermentContext _intermentContext;
 
-        public DetailsModel(Centralization.DAL.MemorialContext context)
+        public DetailsModel(MemorialContext memorialContext, IntermentContext intermentContext)
         {
-            _context = context;
+            _memorialContext = memorialContext;
+            _intermentContext = intermentContext;
         }
 
         public MemorialApplication MemorialApplication { get; set; }
+        public List<Interment> Interments { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,12 +29,23 @@ namespace Centralization.Pages.Applications
                 return NotFound();
             }
 
-            MemorialApplication = await _context.MemorialApplications.FirstOrDefaultAsync(m => m.MemorialApplicationID == id);
+            MemorialApplication = await _memorialContext.MemorialApplications
+                .Include(m => m.LinkedInterments).AsNoTracking()
+                .FirstOrDefaultAsync(m => m.MemorialApplicationID == id);
 
             if (MemorialApplication == null)
             {
                 return NotFound();
             }
+
+            Interments = new List<Interment>();
+            foreach(var interred in MemorialApplication.LinkedInterments)
+            {
+                Interment interment = await _intermentContext.Interments
+                    .FindAsync(new object[] { interred.Idf, interred.CemNo });
+                Interments.Add(interment);
+            }
+
             return Page();
         }
     }

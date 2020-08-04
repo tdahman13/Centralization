@@ -25,7 +25,7 @@ namespace Centralization.DAL
                     FilePath=@"\ALL SAINTS\05-All Saints\OptionalCompleteService\2020\",
                     Type=(ApplicationType)0,
                     UploadDate=DateTime.Parse("8/4/2020 8:22:43 AM"),
-                    UploadedBy="Test",
+                    UploadedBy="Seed Data",
                     CemNo="05"
                 },
                 new MemorialApplication
@@ -34,7 +34,7 @@ namespace Centralization.DAL
                     FilePath=@"\ALL SAINTS\05-All Saints\CompleteCemeteryService\2020\",
                     Type=(ApplicationType)1,
                     UploadDate=DateTime.Parse("8/4/2020 8:23:17 AM"),
-                    UploadedBy="test2",
+                    UploadedBy="Seed Data",
                     CemNo="05"
                 },
                 new MemorialApplication
@@ -43,7 +43,7 @@ namespace Centralization.DAL
                     FilePath=@"\ALL SAINTS\05-All Saints\OptionalCompleteService\2020\",
                     Type=(ApplicationType)0,
                     UploadDate=DateTime.Parse("8/4/2020 8:38:00 AM"),
-                    UploadedBy="test3",
+                    UploadedBy="Seed Data",
                     CemNo="05"
                 },
                 new MemorialApplication
@@ -52,7 +52,7 @@ namespace Centralization.DAL
                     FilePath=@"\ALL SAINTS\05-All Saints\OptionalCompleteService\2020\",
                     Type=(ApplicationType)2,
                     UploadDate=DateTime.Parse("8/4/2020 8:38:42 AM"),
-                    UploadedBy="test4",
+                    UploadedBy="Seed Data",
                     CemNo="05"
                 },
                 new MemorialApplication
@@ -61,7 +61,7 @@ namespace Centralization.DAL
                     FilePath=@"\GOOD SHEPHERD\49-SS. Cyril & Methodius, Lemont\NichePlaque\2020\",
                     Type=(ApplicationType)3,
                     UploadDate=DateTime.Parse("8/4/2020 8:40:14 AM"),
-                    UploadedBy="test5",
+                    UploadedBy="Seed Data",
                     CemNo="49"
                 },
                 new MemorialApplication
@@ -70,7 +70,7 @@ namespace Centralization.DAL
                     FilePath=@"\MARYHILL\42-Maryhill\OptionalCompleteService\2020\",
                     Type=(ApplicationType)0,
                     UploadDate=DateTime.Parse("8/4/2020 8:55:15 AM"),
-                    UploadedBy="test6",
+                    UploadedBy="Seed Data",
                     CemNo="42"
                 },
                 new MemorialApplication
@@ -79,7 +79,7 @@ namespace Centralization.DAL
                     FilePath=@"\SAINT CASIMIR\02-Mount Olivet\OptionalCompleteService\2020\",
                     Type=(ApplicationType)1,
                     UploadDate=DateTime.Parse("8/4/2020 8:55:50 AM"),
-                    UploadedBy="test7",
+                    UploadedBy="Seed Data",
                     CemNo="02"
                 },
                 new MemorialApplication
@@ -88,7 +88,7 @@ namespace Centralization.DAL
                     FilePath=@"\SAINT MICHAEL\34-St. Michael\OptionalCompleteService\2020\",
                     Type=(ApplicationType)0,
                     UploadDate=DateTime.Parse("8/4/2020 8:56:35 AM"),
-                    UploadedBy="test8",
+                    UploadedBy="Seed Data",
                     CemNo="34"
                 },
                 new MemorialApplication
@@ -97,7 +97,7 @@ namespace Centralization.DAL
                     FilePath=@"\QUEEN OF HEAVEN\03-Mount Carmel\NichePlaque\2020\",
                     Type=(ApplicationType)3,
                     UploadDate=DateTime.Parse("8/4/2020 8:57:16 AM"),
-                    UploadedBy="test9",
+                    UploadedBy="Seed Data",
                     CemNo="03"
                 },
                 new MemorialApplication
@@ -106,7 +106,7 @@ namespace Centralization.DAL
                     FilePath=@"\ASCENSION\18-Transfiguration, Wauconda\CompleteCemeteryService\2020\",
                     Type=(ApplicationType)2,
                     UploadDate=DateTime.Parse("8/4/2020 8:59:24 AM"),
-                    UploadedBy="test 10",
+                    UploadedBy="Seed Data",
                     CemNo="18"
                 }
             };
