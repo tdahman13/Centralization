@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using Centralization.Utilities;
 using System.IO;
-using System.Collections.Generic;
 
 namespace Centralization.Pages.Applications
 {
@@ -72,7 +71,11 @@ namespace Centralization.Pages.Applications
             }
 
             var filePath = Path.Combine(folder, trustedFileNameForFileStorage);
-
+            while (System.IO.File.Exists(filePath))
+            {
+                trustedFileNameForFileStorage = Path.GetRandomFileName();
+                filePath = Path.Combine(folder, trustedFileNameForFileStorage);
+            }
             // **WARNING!**
             // In the following example, the file is saved without scanning the file's contents. In most production
             // scenarios, an anti-virus/anti-malware scanner API is used on the file before making the file available
@@ -92,7 +95,7 @@ namespace Centralization.Pages.Applications
             _context.MemorialApplications.Add(MemorialApplication);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { msg = "Application Successfully Added" });
         }
     }
 }
