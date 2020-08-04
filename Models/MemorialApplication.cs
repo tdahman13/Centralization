@@ -6,7 +6,7 @@ namespace Centralization.Models
 {
     public class MemorialApplication
     {
-        public int ID { get; set; }
+        public int MemorialApplicationID { get; set; }
 
         [Display(Name = "File Name")]
         public string FileName { get; set; }

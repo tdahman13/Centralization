@@ -12,5 +12,11 @@ namespace Centralization.DAL
 
         public DbSet<MemorialApplication> MemorialApplications { get; set; }
         public DbSet<LinkedInterment> LinkedInterments { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MemorialApplication>().ToTable("MemorialApplications");
+            modelBuilder.Entity<LinkedInterment>().ToTable("LinkedInterments");
+        }
     }
 }

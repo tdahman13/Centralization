@@ -30,7 +30,7 @@ namespace Centralization.Pages.Applications
                 return NotFound();
             }
 
-            MemorialApplication = await _context.MemorialApplications.FirstOrDefaultAsync(m => m.ID == id);
+            MemorialApplication = await _context.MemorialApplications.FirstOrDefaultAsync(m => m.MemorialApplicationID == id);
 
             if (MemorialApplication == null)
             {
@@ -56,7 +56,7 @@ namespace Centralization.Pages.Applications
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MemorialApplicationExists(MemorialApplication.ID))
+                if (!MemorialApplicationExists(MemorialApplication.MemorialApplicationID))
                 {
                     return NotFound();
                 }
@@ -71,7 +71,7 @@ namespace Centralization.Pages.Applications
 
         private bool MemorialApplicationExists(int id)
         {
-            return _context.MemorialApplications.Any(e => e.ID == id);
+            return _context.MemorialApplications.Any(e => e.MemorialApplicationID == id);
         }
     }
 }

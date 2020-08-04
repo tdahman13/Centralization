@@ -28,7 +28,7 @@ namespace Centralization.Pages.Applications
                 return NotFound();
             }
 
-            MemorialApplication = await _context.MemorialApplications.FirstOrDefaultAsync(m => m.ID == id);
+            MemorialApplication = await _context.MemorialApplications.FirstOrDefaultAsync(m => m.MemorialApplicationID == id);
 
             if (MemorialApplication == null)
             {
