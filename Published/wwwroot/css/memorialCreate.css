@@ -1,0 +1,35 @@
+﻿/** Autocomplete dropdown **/
+.ui-autocomplete {
+    /* same as above */
+    max-height: 200px;
+    max-width: inherit;
+    /* note that x is hidden now */
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.ui-autocomplete-loading {
+    background: Url('/progressBar.gif') no-repeat right center
+}
+
+/*** Location Results ***/
+#location-search-results {
+    background-color: #fff;
+    max-height: 11rem;
+    overflow-y: auto;
+    margin: 2rem 0rem 0rem 0rem;
+}
+
+.resultList {
+    font-weight: 800;
+}
+
+.resultListItem {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.resultListItem:hover {
+    background-color: #1b6ec2;
+    cursor: pointer;
+}
