@@ -69,6 +69,32 @@ namespace Centralization.Pages
             return new JsonResult(result);
         }
 
+        public IActionResult OnGetSearchLocation(string cemetery, string grave, string lot, string block, string section, bool exactSearch)
+        {
+            var intermentIQ = from z in _context.Interments
+                              select z;
+            if (!string.IsNullOrEmpty(cemetery))
+                intermentIQ = intermentIQ.Where(z => z.CemNo.Equals(cemetery));
+
+            if (exactSearch)
+            {
+                intermentIQ = intermentIQ.Where(z => (grave == null ? z.GraveCrypt.Equals(""): z.GraveCrypt.Equals(grave)) 
+                    && (lot == null ? z.LotTier.Equals(""): z.LotTier.Equals(lot))
+                    && (block == null ? z.BlockBuilding.Equals(""): z.BlockBuilding.Equals(block)) 
+                    && (section == null ? z.SectionLocation.Equals(""): z.SectionLocation.Equals(section)));
+            }
+            else
+            {
+                intermentIQ = intermentIQ.Where(z => (grave == null ? z.GraveCrypt.Contains(""): z.GraveCrypt.Contains(grave)) 
+                    && (lot == null ? z.LotTier.Contains(""): z.LotTier.Contains(lot))
+                    && (block == null ? z.BlockBuilding.Contains(""): z.BlockBuilding.Contains(block))
+                    && (section == null ? z.SectionLocation.Contains(""): z.SectionLocation.Contains(section)));
+            }
+
+            var result = intermentIQ.AsNoTracking().Take(500).ToArray();
+            return new JsonResult(result);
+        }
+
         public IActionResult OnGetData(int idf, string cemNo)
         {
             if (cemNo.Length == 1)
@@ -79,20 +105,6 @@ namespace Centralization.Pages
             var intermentProfile = new IntermentProfile(interment);
 
             return Partial("_intermentPartial", intermentProfile);
-        }
-
-        public IActionResult OnGetSearchLocation(string cemetery, string grave, string lot, string block, string section)
-        {
-            var intermentIQ = from z in _context.Interments
-                              select z;
-            if (!string.IsNullOrEmpty(cemetery))
-                intermentIQ = intermentIQ.Where(z => z.CemNo.Equals(cemetery));
-
-            intermentIQ = intermentIQ.Where(z => z.GraveCrypt.Contains(grave) &&
-                z.LotTier.Contains(lot) && z.BlockBuilding.Contains(block) && z.SectionLocation.Contains(section));
-
-            var result = intermentIQ.AsNoTracking().Take(500).ToArray();
-            return new JsonResult(result);
         }
     }
 }

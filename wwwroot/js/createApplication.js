@@ -24,7 +24,6 @@
 
     // Check form and show modal before submitting
     $("#submitBtn").on("click", function (e) {
-        var numberRelated = $(".dead").length;
         if ($(".dead").length <= 0) {
             $("span[data-valmsg-for='MemorialApplication.LinkedInterments']").text("Must add at least one interred.");
             return;
@@ -109,9 +108,7 @@
             var btn = $("<button class='btn bg-transparent' type='button' onclick='removeFromList(this)'>").text("x");
             var p = $("<p class='dead'>" + ui.item.label + "</p>")
                 .attr('data-cemNo', cemNo).attr('data-idf', idf).append(btn);
-            $("#relatedDeadDisplay").append(p);
-
-            
+            $("#relatedDeadDisplay").append(p);            
         }
     });
 
@@ -159,10 +156,11 @@
         var lot = $("#lot").val();
         var block = $("#block").val();
         var section = $("#section").val();
+        var exact = $("#exact").is(":checked");
         $.ajax({
             url: "/Search?handler=SearchLocation",
             type: "GET",
-            data: { cemetery: cem, grave: grave, lot: lot, block: block, section: section },
+            data: { cemetery: cem, grave: grave, lot: lot, block: block, section: section, exactSearch: exact },
             beforeSend: function () {
                 $("#location-search-results").empty();
                 $("#loading-image").show();
@@ -201,32 +199,25 @@
     });
 });
 
-// Clears edit forms
+// Clears autocomplete search fields
 function clearInput(obj) {
     var sib = $(obj).prev();
     $(sib).val("");
     $(sib).focus();
 }
 
-// Clicking search removes old search values
-function clearSearch() {
-    "use strict";
-    $("#partialGoesHere").empty();
-    $("#loading-image").show();
-}
-
 // On ajax failure
 function showFail(msg) {
     "use strict";
-    $("#partialGoesHere").html("<div class='alert alert-danger'>" + msg + "</div>");
     $("#loading-image").hide();
+    alert(msg);
 }
 
+// Location search result on click
 function addToDeadList(obj) {
     var idf = $(obj).data("idf");
     var cemNo = $(obj).data("cemno");
     var label = $(obj).text();
-    console.log(idf + " " + cemNo);
 
     // Check if already selected or different cemetery
     if (!canDisplayDead(idf, cemNo))
@@ -255,6 +246,7 @@ function canDisplayDead(idf, cem) {
     return result;
 }
 
+// Remove interment from linked application list
 function removeFromList(obj) {
     var x = $(obj);
     x.parent().remove();

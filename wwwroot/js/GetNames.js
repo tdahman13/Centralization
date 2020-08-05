@@ -83,10 +83,11 @@
         var lot = $("#lot").val();
         var block = $("#block").val();
         var section = $("#section").val();
+        var exact = $("#exact").is(":checked");
         $.ajax({
             url: "/Search?handler=SearchLocation",
             type: "GET",
-            data: { cemetery: cem, grave: grave, lot: lot, block: block, section: section },
+            data: { cemetery: cem, grave: grave, lot: lot, block: block, section: section, exactSearch: exact },
             beforeSend: function () {
                 $("#location-search-results").empty();
                 $("#loading-image").show();

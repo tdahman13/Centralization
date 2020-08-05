@@ -61,9 +61,17 @@
                     @Html.TextBox("Section", null, new { @class = "form-control", @placeholder = "Section", @id = "section" })
                 </div>
                 <div class="col-12 col-md-4 text-center align-self-end">
-                    <div class="btn-group" role="group" aria-label="Location Buttons">
-                        <input type="button" class="btn btn-primary" value="Search" id="location-search-btn" />
-                        <input type="button" class="btn btn-secondary" value="Reset" id="reset-btn" />
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="col-form-label" for="exact">Exact</label>
+                            <input id="exact" name="exact" type="checkbox" />
+                        </div>
+                        <div class="col-12">
+                            <div class="btn-group" role="group" aria-label="Location Buttons">
+                                <input type="button" class="btn btn-primary" value="Search" id="location-search-btn" />
+                                <input type="button" class="btn btn-secondary" value="Reset" id="reset-btn" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
