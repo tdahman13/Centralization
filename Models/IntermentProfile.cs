@@ -1,6 +1,5 @@
 ﻿using Centralization.DAL;
 using Centralization.Utilities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -67,9 +66,16 @@ namespace Centralization.Models
 
         public string GetIntermentOrderPathBackup(Interment interred)
         {
+            var grave = interred.GraveCrypt;
+            var lot = interred.LotTier;
+            var block = interred.BlockBuilding;
+            var section = interred.SectionLocation;
+
             var intermentOrder = _context.IntermentOrders.Where(
-                x => interred.GraveCrypt.Equals(x.Grave) && interred.LotTier.Equals(x.Lot)
-                && interred.BlockBuilding.Equals(x.Block) && interred.SectionLocation.Equals(x.Section)
+                x => (grave == null ? x.Grave.Equals(""): x.Grave.Equals(grave))  
+                && (lot == null ? x.Lot.Equals(""): x.Lot.Equals(lot))
+                && (block == null ? x.Block.Equals(""): x.Block.Equals(block))
+                && (section == null ? x.Section.Equals(""): x.Section.Equals(section))
                 && interred.CemNo.Equals(x.Cemid))
                 .FirstOrDefault();
 
@@ -94,17 +100,26 @@ namespace Centralization.Models
 
         public string GetLotCardPathBackup(Interment interred)
         {
+            var grave = interred.GraveCrypt;
+            var lot = interred.LotTier;
+            var block = interred.BlockBuilding;
+            var section = interred.SectionLocation;
+
             var lotCardID = _context.LotCardInventory.Where(
-                x => interred.GraveCrypt.Equals(x.Grave) && interred.LotTier.Equals(x.Lot)
-                && interred.BlockBuilding.Equals(x.Block) && interred.SectionLocation.Equals(x.Section)
+                x => (grave == null ? x.Grave.Equals(""): x.Grave.Equals(grave))
+                && (lot == null ? x.Lot.Equals(""): x.Lot.Equals(lot))
+                && (block == null ? x.Block.Equals(""): x.Block.Equals(block))
+                && (section == null ? x.Section.Equals(""): x.Section.Equals(section))
                 && interred.CemNo.Equals(x.CemNum))
                 .FirstOrDefault();
 
             if (lotCardID != null)
             {
                 var lotCard = _context.LotCards.Where(
-                    x => lotCardID.LotCardId == x.Id && interred.LotTier.Equals(x.Lot)
-                    && interred.BlockBuilding.Equals(x.Block) && interred.SectionLocation.Equals(x.Section)
+                    x => lotCardID.LotCardId == x.Id
+                    && (lot == null ? x.Lot.Equals("") : x.Lot.Equals(lot))
+                    && (block == null ? x.Block.Equals("") : x.Block.Equals(block))
+                    && (section == null ? x.Section.Equals("") : x.Section.Equals(section))
                     && interred.CemNo.Equals(x.Cemid))
                     .FirstOrDefault();
                 if (lotCard != null)
@@ -117,12 +132,16 @@ namespace Centralization.Models
 
         public string GetDocumentsPath(Interment interred)
         {
+            var grave = interred.GraveCrypt;
+            var lot = interred.LotTier;
+            var block = interred.BlockBuilding;
+            var section = interred.SectionLocation;
 
             var document = _context.DocFiles.Where(
-                x => interred.LotTier.Equals(x.Lot) & interred.BlockBuilding.Equals(x.Block)
-                && interred.SectionLocation.Equals(x.Section) && interred.CemNo.Equals(x.Cemid)
-                //&& Convert.ToInt32(interred.GraveCrypt) >= Convert.ToInt32(x.Gravelow)
-                //&& Convert.ToInt32(interred.GraveCrypt) <= Convert.ToInt32(x.Gravehigh)
+                x => (lot == null ? x.Lot.Equals(""): x.Lot.Equals(lot))
+                && (block == null ? x.Block.Equals(""): x.Block.Equals(block))
+                && (section == null ? x.Section.Equals(""): x.Section.Equals(section))
+                && interred.CemNo.Equals(x.Cemid)
                 && (interred.GraveCrypt.Equals(x.Gravehigh) || interred.GraveCrypt.Equals(x.Gravelow)))
                 .FirstOrDefault();
 
