@@ -55,7 +55,7 @@ namespace Centralization.Pages
                     .Where(x => x.LastName.Contains(term));
             }
 
-            var result = intermentsIQ.AsNoTracking().Take(500).AsQueryable();
+            var result = intermentsIQ.OrderBy(x => x.LastName).AsNoTracking().Take(500).AsQueryable();
 
             return new JsonResult(result);
         }
@@ -91,7 +91,7 @@ namespace Centralization.Pages
                     && (section == null ? z.SectionLocation.Contains(""): z.SectionLocation.Contains(section)));
             }
 
-            var result = intermentIQ.AsNoTracking().Take(500).ToArray();
+            var result = intermentIQ.OrderBy(x => x.LastName).AsNoTracking().Take(500).ToArray();
             return new JsonResult(result);
         }
 
