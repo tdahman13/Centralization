@@ -1,8 +1,6 @@
 ﻿using Centralization.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Centralization.DAL
 {
@@ -17,13 +15,12 @@ namespace Centralization.DAL
                 return;     // DB has been seeded
             }
 
-            var memorialApplications = new MemorialApplication[]
-            {
+            MemorialApplication[] memorialApplications = {
                 new MemorialApplication
                 {
                     FileName="dupiq00w.prs",
                     FilePath=@"\ALL SAINTS\05-All Saints\OptionalCompleteService\2020\",
-                    Type=(ApplicationType)0,
+                    Type=0,
                     UploadDate=DateTime.Parse("8/4/2020 8:22:43 AM"),
                     UploadedBy="Seed Data",
                     CemNo="05"
@@ -114,7 +111,7 @@ namespace Centralization.DAL
             context.MemorialApplications.AddRange(memorialApplications);
             context.SaveChanges();
 
-            var linked = new LinkedInterment[]
+            LinkedInterment[] linked = 
             {
                 new LinkedInterment{Idf=54355,CemNo="05", MemorialApplicationId = 1},
                 new LinkedInterment{Idf=18403,CemNo="05", MemorialApplicationId = 2},

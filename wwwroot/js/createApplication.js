@@ -52,19 +52,23 @@
         // Set up related Interments
         var n = 0;
         var modalIntermentString = "";
-        $(".dead").each(function () {
+        $(".dead").each(function() {
             var dead = $(this);
-            var cem = dead.data('cemno');
-            var idf = dead.data('idf');
+            var cemNo = dead.data("cemno");
+            var idf = dead.data("idf");
             var inputCemNo = $("<input>").attr("type", "hidden")
-                .attr("name", "MemorialApplication.LinkedInterments[" + n + "].CemNo").val(cem);
+                .attr("name", "MemorialApplication.LinkedInterments[" + n + "].CemNo").val(cemNo);
             var inputIdf = $("<input>").attr("type", "hidden")
                 .attr("name", "MemorialApplication.LinkedInterments[" + n + "].Idf").val(idf);
             relatedSection.append(inputCemNo);
             relatedSection.append(inputIdf);
-            modalIntermentString += "<dt class='col-sm-3'>" + (n + 1) + "</dt><dd class='col-sm-9'>" + dead.text() + "</dd>";
+            modalIntermentString += "<dt class='col-sm-3'>" +
+                (n + 1) +
+                "</dt><dd class='col-sm-9'>" +
+                dead.text() +
+                "</dd>";
             n++;
-        })
+        });
 
         var type = $("#MemorialApplication_Type option:selected").text();
         var uploadBy = $("#MemorialApplication_UploadedBy").val();
@@ -84,16 +88,16 @@
                 url: "/Search?handler=SearchBothNames",
                 type: "GET",
                 data: { term: request.term, cemetery: $("#cemeterySearch").val() },
-                success: function (data) {
+                success: function(data) {
                     response(data);
                 },
-                error: function (response) {
+                error: function(response) {
                     alert(response);
                 },
-                failure: function (response) {
+                failure: function(response) {
                     alert("fail: " + response);
                 }
-            })
+            });
         },
         delay: 600,
         minLength: 2,
@@ -107,7 +111,7 @@
             $("span[data-valmsg-for='MemorialApplication.LinkedInterments']").text('');
             var btn = $("<button class='btn bg-transparent' type='button' onclick='removeFromList(this)'>").text("x");
             var p = $("<p class='dead'>" + ui.item.label + "</p>")
-                .attr('data-cemNo', cemNo).attr('data-idf', idf).append(btn);
+                .attr('data-cemNo', cemNo).attr("data-idf", idf).append(btn);
             $("#relatedDeadDisplay").append(p);            
         }
     });
@@ -119,18 +123,19 @@
                 url: "/Search?handler=SearchFullNames",
                 type: "GET",
                 data: {
-                    term: request.term, cemetery: $("#cemeterySearch").val()
+                    term: request.term,
+                    cemetery: $("#cemeterySearch").val()
                 },
-                success: function (data) {
+                success: function(data) {
                     response(data);
                 },
-                error: function (response) {
+                error: function(response) {
                     alert(response);
                 },
-                failure: function (response) {
+                failure: function(response) {
                     alert("fail: " + response);
                 }
-            })
+            });
         },
         delay: 600,
         minLength: 2,
@@ -161,32 +166,33 @@
             url: "/Search?handler=SearchLocation",
             type: "GET",
             data: { cemetery: cem, grave: grave, lot: lot, block: block, section: section, exactSearch: exact },
-            beforeSend: function () {
+            beforeSend: function() {
                 $("#location-search-results").empty();
                 $("#loading-image").show();
             },
-            success: function (data) {
+            success: function(data) {
                 var divToReplace = $("#location-search-results");
                 var orderedList = $("<ul class='resultList'>").append("Result Count: " + data.length)
                     .appendTo(divToReplace);
-                $.each(data, function (i, item) {
-                    var $tr = $("<li class='resultListItem' onClick='addToDeadList(this)'>")
-                        .attr('data-cemNo', item.cemNo).attr('data-idf', item.idf)
-                        .append(item.label).appendTo(orderedList);
-                });
+                $.each(data,
+                    function(i, item) {
+                        var $tr = $("<li class='resultListItem' onClick='addToDeadList(this)'>")
+                            .attr("data-cemNo", item.cemNo).attr("data-idf", item.idf)
+                            .append(item.label).appendTo(orderedList);
+                    });
             },
-            error: function (response) {
+            error: function(response) {
                 var msg = response.error;
                 showFail(msg);
             },
-            failure: function (response) {
+            failure: function(response) {
                 var msg = response.error;
                 showFail(msg);
             },
-            complete: function () {
+            complete: function() {
                 $("#loading-image").hide();
             }
-        })
+        });
     });
 
     // Reset Location Form
@@ -223,10 +229,10 @@ function addToDeadList(obj) {
     if (!canDisplayDead(idf, cemNo))
         return;
 
-    $("span[data-valmsg-for='MemorialApplication.LinkedInterments']").text('');
+    $("span[data-valmsg-for='MemorialApplication.LinkedInterments']").text("");
     var btn = $("<button class='btn bg-transparent' type='button' onclick='removeFromList(this)'>").text("x");
     var p = $("<p class='dead'>" + label + "</p>")
-        .attr('data-cemno', cemNo).attr('data-idf', idf).append(btn);
+        .attr("data-cemno", cemNo).attr("data-idf", idf).append(btn);
     $("#relatedDeadDisplay").append(p);
 }
 
@@ -235,10 +241,10 @@ function canDisplayDead(idf, cem) {
     var result = true;
     $(".dead").each(function () {
         var dead = $(this);
-        var deadCem = dead.data('cemno');
-        var deadIdf = dead.data('idf');
-        if (cem == deadCem)
-            if (idf == deadIdf) {
+        var deadCem = dead.data("cemno");
+        var deadIdf = dead.data("idf");
+        if (cem === deadCem)
+            if (idf === deadIdf) {
                 result = false;
                 return result;
             }

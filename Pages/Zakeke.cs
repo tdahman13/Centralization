@@ -3,11 +3,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Centralization.Pages
 {
-    public class PrivacyModel : PageModel
+    public class ZakekeModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
+        private readonly ILogger<ZakekeModel> _logger;
 
-        public PrivacyModel(ILogger<PrivacyModel> logger)
+        public ZakekeModel(ILogger<ZakekeModel> logger)
         {
             _logger = logger;
         }
