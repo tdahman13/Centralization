@@ -52,32 +52,28 @@ namespace Centralization.Models
             }
 
             string documentPath = pg.GetDocumentsPath(interred);
-            if (!string.IsNullOrEmpty(documentPath))
-                DocumentImages = ImageGenerator.TiffToImages(documentPath);
-            else
-                DocumentImages = new List<string>();
+            DocumentImages = !string.IsNullOrEmpty(documentPath) ? ImageGenerator.TiffToImages(documentPath) : new List<string>();
         }
     }
 
-    class BackupPathGenerator
+    internal class BackupPathGenerator
     {
         private readonly DocumentContext _context = new DocumentContext();
 
 
         public string GetIntermentOrderPathBackup(Interment interred)
         {
-            var grave = interred.GraveCrypt;
-            var lot = interred.LotTier;
-            var block = interred.BlockBuilding;
-            var section = interred.SectionLocation;
+            string grave = interred.GraveCrypt;
+            string lot = interred.LotTier;
+            string block = interred.BlockBuilding;
+            string section = interred.SectionLocation;
 
-            var intermentOrder = _context.IntermentOrders.Where(
-                x => (grave == null ? x.Grave.Equals(""): x.Grave.Equals(grave))  
-                && (lot == null ? x.Lot.Equals(""): x.Lot.Equals(lot))
-                && (block == null ? x.Block.Equals(""): x.Block.Equals(block))
-                && (section == null ? x.Section.Equals(""): x.Section.Equals(section))
-                && interred.CemNo.Equals(x.Cemid))
-                .FirstOrDefault();
+            IntermentOrder intermentOrder = _context.IntermentOrders
+                .FirstOrDefault(x => (grave == null ? x.Grave.Equals(""): x.Grave.Equals(grave))  
+                                     && (lot == null ? x.Lot.Equals(""): x.Lot.Equals(lot))
+                                     && (block == null ? x.Block.Equals(""): x.Block.Equals(block))
+                                     && (section == null ? x.Section.Equals(""): x.Section.Equals(section))
+                                     && interred.CemNo.Equals(x.Cemid));
 
             string path = interred.IOFullPath;
             if (intermentOrder != null)
@@ -87,10 +83,9 @@ namespace Centralization.Models
 
         public string GetEasementPathBackup(Interment interred)
         {
-            var easement = _context.Easements.Where(
-                x => interred.EasementNo.Equals(x.Easementno) && interred.CemNo.Equals(x.Cemid)
-                && interred.IDate == x.Date)
-                .FirstOrDefault();
+            Easements easement = _context.Easements
+                .FirstOrDefault(x => interred.EasementNo.Equals(x.Easementno) && interred.CemNo.Equals(x.Cemid)
+                                                                              && interred.IDate == x.Date);
 
             string path = interred.EbFullPath;
             if (easement != null)
@@ -100,28 +95,26 @@ namespace Centralization.Models
 
         public string GetLotCardPathBackup(Interment interred)
         {
-            var grave = interred.GraveCrypt;
-            var lot = interred.LotTier;
-            var block = interred.BlockBuilding;
-            var section = interred.SectionLocation;
+            string grave = interred.GraveCrypt;
+            string lot = interred.LotTier;
+            string block = interred.BlockBuilding;
+            string section = interred.SectionLocation;
 
-            var lotCardID = _context.LotCardInventory.Where(
-                x => (grave == null ? x.Grave.Equals(""): x.Grave.Equals(grave))
-                && (lot == null ? x.Lot.Equals(""): x.Lot.Equals(lot))
-                && (block == null ? x.Block.Equals(""): x.Block.Equals(block))
-                && (section == null ? x.Section.Equals(""): x.Section.Equals(section))
-                && interred.CemNo.Equals(x.CemNum))
-                .FirstOrDefault();
+            LotCardInventory lotCardId = _context.LotCardInventory
+                .FirstOrDefault(x => (grave == null ? x.Grave.Equals(""): x.Grave.Equals(grave))
+                                     && (lot == null ? x.Lot.Equals(""): x.Lot.Equals(lot))
+                                     && (block == null ? x.Block.Equals(""): x.Block.Equals(block))
+                                     && (section == null ? x.Section.Equals(""): x.Section.Equals(section))
+                                     && interred.CemNo.Equals(x.CemNum));
 
-            if (lotCardID != null)
+            if (lotCardId != null)
             {
-                var lotCard = _context.LotCards.Where(
-                    x => lotCardID.LotCardId == x.Id
-                    && (lot == null ? x.Lot.Equals("") : x.Lot.Equals(lot))
-                    && (block == null ? x.Block.Equals("") : x.Block.Equals(block))
-                    && (section == null ? x.Section.Equals("") : x.Section.Equals(section))
-                    && interred.CemNo.Equals(x.Cemid))
-                    .FirstOrDefault();
+                LotCard lotCard = _context.LotCards
+                    .FirstOrDefault(x => lotCardId.LotCardId == x.Id
+                                         && (lot == null ? x.Lot.Equals("") : x.Lot.Equals(lot))
+                                         && (block == null ? x.Block.Equals("") : x.Block.Equals(block))
+                                         && (section == null ? x.Section.Equals("") : x.Section.Equals(section))
+                                         && interred.CemNo.Equals(x.Cemid));
                 if (lotCard != null)
                     return interred.LCFullPath + lotCard.Tifpath + lotCard.Lctif;
                 return interred.LCFullPath;
@@ -132,18 +125,17 @@ namespace Centralization.Models
 
         public string GetDocumentsPath(Interment interred)
         {
-            var grave = interred.GraveCrypt;
-            var lot = interred.LotTier;
-            var block = interred.BlockBuilding;
-            var section = interred.SectionLocation;
+            string grave = interred.GraveCrypt;
+            string lot = interred.LotTier;
+            string block = interred.BlockBuilding;
+            string section = interred.SectionLocation;
 
-            var document = _context.DocFiles.Where(
-                x => (lot == null ? x.Lot.Equals(""): x.Lot.Equals(lot))
-                && (block == null ? x.Block.Equals(""): x.Block.Equals(block))
-                && (section == null ? x.Section.Equals(""): x.Section.Equals(section))
-                && interred.CemNo.Equals(x.Cemid)
-                && (interred.GraveCrypt.Equals(x.Gravehigh) || interred.GraveCrypt.Equals(x.Gravelow)))
-                .FirstOrDefault();
+            DocFile document = _context.DocFiles
+                .FirstOrDefault(x => (lot == null ? x.Lot.Equals(""): x.Lot.Equals(lot))
+                                     && (block == null ? x.Block.Equals(""): x.Block.Equals(block))
+                                     && (section == null ? x.Section.Equals(""): x.Section.Equals(section))
+                                     && interred.CemNo.Equals(x.Cemid)
+                                     && (interred.GraveCrypt.Equals(x.Gravehigh) || interred.GraveCrypt.Equals(x.Gravelow)));
 
             if (document != null)
                 return @"\\imageserver\CemeteryDocuments\" + interred.ParentCemName + document.Tifpath + document.Dftif;

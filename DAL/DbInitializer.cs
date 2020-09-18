@@ -116,20 +116,20 @@ namespace Centralization.DAL
 
             var linked = new LinkedInterment[]
             {
-                new LinkedInterment{Idf=54355,CemNo="05", MemorialApplicationID = 1},
-                new LinkedInterment{Idf=18403,CemNo="05", MemorialApplicationID = 2},
-                new LinkedInterment{Idf=96816,CemNo="05", MemorialApplicationID = 3},
-                new LinkedInterment{Idf=157822,CemNo="05", MemorialApplicationID = 4},
-                new LinkedInterment{Idf=22879,CemNo="05", MemorialApplicationID = 4},
-                new LinkedInterment{Idf=395889,CemNo="49", MemorialApplicationID = 5},
-                new LinkedInterment{Idf=54020,CemNo="42", MemorialApplicationID = 6},
-                new LinkedInterment{Idf=11144,CemNo="02", MemorialApplicationID = 7},
-                new LinkedInterment{Idf=13076,CemNo="34", MemorialApplicationID = 8},
-                new LinkedInterment{Idf=192383,CemNo="03", MemorialApplicationID = 9},
-                new LinkedInterment{Idf=181099,CemNo="03", MemorialApplicationID = 9},
-                new LinkedInterment{Idf=34843,CemNo="18", MemorialApplicationID = 10},
-                new LinkedInterment{Idf=34831,CemNo="18", MemorialApplicationID = 10},
-                new LinkedInterment{Idf=35094,CemNo="18", MemorialApplicationID = 10}
+                new LinkedInterment{Idf=54355,CemNo="05", MemorialApplicationId = 1},
+                new LinkedInterment{Idf=18403,CemNo="05", MemorialApplicationId = 2},
+                new LinkedInterment{Idf=96816,CemNo="05", MemorialApplicationId = 3},
+                new LinkedInterment{Idf=157822,CemNo="05", MemorialApplicationId = 4},
+                new LinkedInterment{Idf=22879,CemNo="05", MemorialApplicationId = 4},
+                new LinkedInterment{Idf=395889,CemNo="49", MemorialApplicationId = 5},
+                new LinkedInterment{Idf=54020,CemNo="42", MemorialApplicationId = 6},
+                new LinkedInterment{Idf=11144,CemNo="02", MemorialApplicationId = 7},
+                new LinkedInterment{Idf=13076,CemNo="34", MemorialApplicationId = 8},
+                new LinkedInterment{Idf=192383,CemNo="03", MemorialApplicationId = 9},
+                new LinkedInterment{Idf=181099,CemNo="03", MemorialApplicationId = 9},
+                new LinkedInterment{Idf=34843,CemNo="18", MemorialApplicationId = 10},
+                new LinkedInterment{Idf=34831,CemNo="18", MemorialApplicationId = 10},
+                new LinkedInterment{Idf=35094,CemNo="18", MemorialApplicationId = 10}
             };
 
             context.LinkedInterments.AddRange(linked);
