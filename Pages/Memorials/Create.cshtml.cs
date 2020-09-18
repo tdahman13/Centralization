@@ -1,15 +1,15 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Centralization.DAL;
 using Centralization.Models;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Http;
 using Centralization.Utilities;
-using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 
-namespace Centralization.Pages.Applications
+namespace Centralization.Pages.Memorials
 {
     public class CreateModel : PageModel
     {
@@ -41,8 +41,7 @@ namespace Centralization.Pages.Applications
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
+        // ReSharper disable once UnusedMember.Global --- AJAX
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -52,7 +51,7 @@ namespace Centralization.Pages.Applications
             }
 
             // Save file in folder
-            var formFileContent = await FileHelpers.ProcessFormFile<IFormFile>(
+            byte[] formFileContent = await FileHelpers.ProcessFormFile<IFormFile>(
                 FileUpload, ModelState, _permittedExtensions, _fileSizeLimit);
 
             if (!ModelState.IsValid)
@@ -70,7 +69,7 @@ namespace Centralization.Pages.Applications
                 Directory.CreateDirectory(folder);
             }
 
-            var filePath = Path.Combine(folder, trustedFileNameForFileStorage);
+            string filePath = Path.Combine(folder, trustedFileNameForFileStorage);
             while (System.IO.File.Exists(filePath))
             {
                 trustedFileNameForFileStorage = Path.GetRandomFileName();
@@ -80,7 +79,7 @@ namespace Centralization.Pages.Applications
             // In the following example, the file is saved without scanning the file's contents. In most production
             // scenarios, an anti-virus/anti-malware scanner API is used on the file before making the file available
             // for download or for use by other systems. For more information, see the topic that accompanies this sample.
-            using (var fileStream = System.IO.File.Create(filePath))
+            await using (var fileStream = System.IO.File.Create(filePath))
             {
                 await fileStream.WriteAsync(formFileContent);
 
@@ -92,7 +91,7 @@ namespace Centralization.Pages.Applications
             MemorialApplication.FilePath = MemorialApplication.GetPath();
             MemorialApplication.FileName = trustedFileNameForFileStorage;
             MemorialApplication.UploadDate = DateTime.Now;
-            _context.MemorialApplications.Add(MemorialApplication);
+            await _context.MemorialApplications.AddAsync(MemorialApplication);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index", new { msg = "Application Successfully Added" });

@@ -128,7 +128,7 @@ function getData(idf, cemNo) {
     $.ajax({
         url: "/Search?handler=Data",
         type: "GET",
-        timeout: 10000,
+        timeout: 30000,
         contentType: "application/json;charset=utf-8",
         dataType: "html",
         data: { idf: idf, cemNo: cemNo },

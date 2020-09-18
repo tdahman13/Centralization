@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Centralization.DAL;
+using Centralization.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Centralization.DAL;
-using Centralization.Models;
 
-namespace Centralization.Pages.Applications
+namespace Centralization.Pages.Memorials
 {
     public class EditModel : PageModel
     {
@@ -24,6 +24,7 @@ namespace Centralization.Pages.Applications
         public MemorialApplication MemorialApplication { get; set; }
         public List<Interment> Interments { get; set; }
 
+        // ReSharper disable once UnusedMember.Global --- AJAX
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -44,14 +45,13 @@ namespace Centralization.Pages.Applications
             foreach(var interred in MemorialApplication.LinkedInterments)
             {
                 var interment = await _intermentContext.Interments
-                    .FindAsync(new object[] { interred.Idf, interred.CemNo });
+                    .FindAsync(interred.Idf, interred.CemNo);
                 Interments.Add(interment);
             }
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
+        // ReSharper disable once UnusedMember.Global --- AJAX
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

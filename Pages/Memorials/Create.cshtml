@@ -1,5 +1,5 @@
 ﻿@page
-@model Centralization.Pages.Applications.CreateModel
+@model Centralization.Pages.Memorials.CreateModel
 @using Centralization.Models
 @{
     ViewData["Title"] = "Create";
@@ -25,40 +25,47 @@
             </div>
 
             <div class="form-row" id="name-search-form">
-                @Html.Label("Cemetery", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "cemeterySearch" })
-                @Html.DropDownList("cemeterySearch", Centralization.Models.Cemeteries.cemeteriesSelectList, null, new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3" })
-                @Html.Label("Name (Last, First)", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "searchName" })
+                @Html.Label("Cemetery", null, htmlAttributes: new
+                {
+                    @class = "col-form-label col-12 col-md-3", @for = "cemeterySearch"
+                })
+                @Html.DropDownList("cemeterySearch", Cemeteries.cemeteriesSelectList, null, 
+                    new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3" })
+                @Html.Label("Name (Last, First)", null, 
+                    htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "searchName" })
                 @Html.TextBox("searchName", null,
-                new { @class = "form-control col-12 col-md-9 md-2 mb-md-3", @placeholder = "Last name, First name..." })
-                <button class="btn bg-transparent" style="margin-left: -30px; z-index: 100; padding:0rem 0rem 1rem 0rem;"
+                new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3", placeholder = "Last name, First name..." })
+                <button class="btn bg-transparent" style="margin-left: -30px; z-index: 100; padding:0 0 1rem 0;"
                         type="button" onclick="clearInput(this)">
                     <i class="ui-icon ui-icon-close"></i>
                 </button>
                 @Html.Label("Name (Full)", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "searchFull" })
-                @Html.TextBox("searchFull", null, new { @class = "form-control col-12 col-md-9", @placeholder = "Type 2 characters to start searching..." })
-                <button class="btn bg-transparent" style="margin-left:-30px; z-index: 100; padding: 0rem 0rem 0rem 0rem;" type="button" onclick="clearInput(this)">
+                @Html.TextBox("searchFull", null, 
+                    new { @class = "form-control col-12 col-md-9", placeholder = "Type 2 characters to start searching..." })
+                <button class="btn bg-transparent" style="margin-left:-30px; z-index: 100; padding: 0 0 0 0;" type="button" onclick="clearInput(this)">
                     <i class="ui-icon ui-icon-close"></i>
                 </button>
             </div>
 
             <div class="form-row" id="location-search-form" style="display:none;">
                 @Html.Label("Cemetery", null, htmlAttributes: new { @class = "col-form-label col-12 col-md-3", @for = "cemetery" })
-                @Html.DropDownList("cemetery", Centralization.Models.Cemeteries.cemeteriesSelectList, null, new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3" })
+                @Html.DropDownList("cemetery", Cemeteries.cemeteriesSelectList, null, 
+                    new { @class = "form-control col-12 col-md-9 mb-2 mb-md-3" })
                 <div class="col-12 col-md-2">
                     @Html.Label("Grave/Crypt", null, htmlAttributes: new { @class = "col-form-label", @for = "grave" })
-                    @Html.TextBox("Grave", null, new { @class = "form-control", @placeholder = "Grave", @id = "grave" })
+                    @Html.TextBox("Grave", null, new { @class = "form-control", placeholder = "Grave", id = "grave" })
                 </div>
                 <div class="col-12 col-md-2">
                     @Html.Label("Lot/Tier", null, htmlAttributes: new { @class = "col-form-label", @for = "lot" })
-                    @Html.TextBox("Lot", null, new { @class = "form-control", @placeholder = "Lot", @id = "lot" })
+                    @Html.TextBox("Lot", null, new { @class = "form-control", placeholder = "Lot", id = "lot" })
                 </div>
                 <div class="col-12 col-md-2">
                     @Html.Label("Block/Building", null, htmlAttributes: new { @class = "col-form-label", @for = "block" })
-                    @Html.TextBox("Block", null, new { @class = "form-control", @placeholder = "Block", @id = "block" })
+                    @Html.TextBox("Block", null, new { @class = "form-control", placeholder = "Block", id = "block" })
                 </div>
                 <div class="col-12 col-md-2">
                     @Html.Label("Section/Location", null, htmlAttributes: new { @class = "col-form-label", @for = "section" })
-                    @Html.TextBox("Section", null, new { @class = "form-control", @placeholder = "Section", @id = "section" })
+                    @Html.TextBox("Section", null, new { @class = "form-control", placeholder = "Section", id = "section" })
                 </div>
                 <div class="col-12 col-md-4 text-center align-self-end">
                     <div class="row">

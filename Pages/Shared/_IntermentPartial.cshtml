@@ -71,7 +71,8 @@
                             {
                                 <div class="carousel-item">
                                     <a href="#" class="with-caption image-link" data-mfp-src="@Model.IntermentOrderImages.ElementAt(i)">
-                                        <img src="@Model.IntermentOrderImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("IOImage{0}", i+1)" />
+                                        <img src="@Model.IntermentOrderImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." 
+                                             id="@($"IOImage{i + 1}")" />
                                     </a>
                                 </div>
                             }
@@ -120,7 +121,8 @@
                             {
                                 <div class="carousel-item">
                                     <a href="#" class="with-caption image-link" data-mfp-src="@Model.EasementImages.ElementAt(i)">
-                                        <img src="@Model.EasementImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("EBImage{0}", i+1)" />
+                                        <img src="@Model.EasementImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." 
+                                             id="@($"EBImage{i + 1}")" />
                                     </a>
                                 </div>
                             }
@@ -169,7 +171,8 @@
                             {
                                 <div class="carousel-item">
                                     <a href="#" class="with-caption image-link" data-mfp-src="@Model.LotCardImages.ElementAt(i)">
-                                        <img src="@Model.LotCardImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("LCImage{0}", i+1)" />
+                                        <img src="@Model.LotCardImages.ElementAt(i)" class="d-block w-100 my-image" 
+                                             alt="..." id="@($"LCImage{i + 1}")" />
                                     </a>
                                 </div>
                             }
@@ -219,7 +222,8 @@
                             {
                                 <div class="carousel-item">
                                     <a href="#" class="with-caption image-link" data-mfp-src="@Model.IntermentCardImages.ElementAt(i)">
-                                        <img src="@Model.IntermentCardImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("ICImage{0}", i+1)" />
+                                        <img src="@Model.IntermentCardImages.ElementAt(i)" class="d-block w-100 my-image" 
+                                             alt="..." id="@($"ICImage{i + 1}")" />
                                     </a>
                                 </div>
                             }
@@ -268,7 +272,8 @@
                             {
                                 <div class="carousel-item">
                                     <a href="#" class="with-caption image-link" data-mfp-src="@Model.DocumentImages.ElementAt(i)">
-                                        <img src="@Model.DocumentImages.ElementAt(i)" class="d-block w-100 my-image" alt="..." id="@string.Format("DocImage{0}", i+1)" />
+                                        <img src="@Model.DocumentImages.ElementAt(i)" class="d-block w-100 my-image" 
+                                             alt="..." id="@($"DocImage{i + 1}")" />
                                     </a>
                                 </div>
                             }

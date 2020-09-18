@@ -26,10 +26,11 @@ namespace Centralization.Pages
             //interments = await _context.Interments.Take(100).ToListAsync();
         }
 
+        // ReSharper disable once UnusedMember.Global - used for AJAX
         public IActionResult OnGetSearchBothNames(string term, string cemetery)
         {
             string first, last;
-            var intermentsIQ = from z in _context.Interments
+            IQueryable<Interment> intermentsIQ = from z in _context.Interments
                                select z;
 
             if (!string.IsNullOrEmpty(cemetery))
@@ -55,23 +56,24 @@ namespace Centralization.Pages
                     .Where(x => x.LastName.Contains(term));
             }
 
-            var result = intermentsIQ.OrderBy(x => x.LastName).AsNoTracking().Take(500).AsQueryable();
+            IQueryable<Interment> result = intermentsIQ.OrderBy(x => x.LastName).AsNoTracking().Take(500).AsQueryable();
 
             return new JsonResult(result);
         }
 
+        // ReSharper disable once UnusedMember.Global - Used for AJAX
         public IActionResult OnGetSearchFullNames(string term, string cemetery)
         {
             // Call stored procedure to get interments, cemetery can be null
-            var names = _context.Interments.FromSqlRaw("GetIntermentsByFullNameAndCemNo @p0, @p1", term, cemetery);
-            var result = names.AsNoTracking().AsQueryable();
+            IQueryable<Interment> names = _context.Interments.FromSqlRaw("GetIntermentsByFullNameAndCemNo @p0, @p1", term, cemetery);
+            IQueryable<Interment> result = names.AsNoTracking().AsQueryable();
 
             return new JsonResult(result);
         }
 
         public IActionResult OnGetSearchLocation(string cemetery, string grave, string lot, string block, string section, bool exactSearch)
         {
-            var intermentIQ = from z in _context.Interments
+            IQueryable<Interment> intermentIQ = from z in _context.Interments
                               select z;
             if (!string.IsNullOrEmpty(cemetery))
                 intermentIQ = intermentIQ.Where(z => z.CemNo.Equals(cemetery));
@@ -91,7 +93,7 @@ namespace Centralization.Pages
                     && (section == null ? z.SectionLocation.Contains(""): z.SectionLocation.Contains(section)));
             }
 
-            var result = intermentIQ.OrderBy(x => x.LastName).AsNoTracking().Take(500).ToArray();
+            Interment[] result = intermentIQ.OrderBy(x => x.LastName).AsNoTracking().Take(500).ToArray();
             return new JsonResult(result);
         }
 
@@ -101,8 +103,8 @@ namespace Centralization.Pages
             {
                 cemNo = "0" + cemNo;
             }
-            var interment = _context.Interments.Find(new object[] { idf, cemNo });
-            var intermentProfile = new IntermentProfile(interment);
+            Interment interred = _context.Interments.Find(idf, cemNo);
+            IntermentProfile intermentProfile = new IntermentProfile(interred);
 
             return Partial("_intermentPartial", intermentProfile);
         }

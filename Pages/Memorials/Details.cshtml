@@ -1,5 +1,5 @@
 ﻿@page
-@model Centralization.Pages.Applications.DetailsModel
+@model Centralization.Pages.Memorials.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -45,7 +45,7 @@
             @Html.DisplayNameFor(model => model.MemorialApplication.CemNo)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => Centralization.Models.Cemeteries.cems[Model.MemorialApplication.CemNo])
+            @Html.DisplayFor(model => Models.Cemeteries.cems[Model.MemorialApplication.CemNo])
         </dd>
     </dl>
 </div>
