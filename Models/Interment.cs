@@ -5,7 +5,7 @@ namespace Centralization.Models
 {
     public class Interment
     {
-        private readonly string PathStart = @"\\imageserver\CemeteryDocuments\";
+        private const string PathStart = @"\\imageserver\CemeteryDocuments\";
         public int Idf { get; set; }
 
         [Display(Name = "Last Name")]
@@ -85,13 +85,13 @@ namespace Centralization.Models
                 }
                 if (Type.Equals("1") || Type.Equals("4"))
                 {
-                    return string.Format("Crypt: {0} | Tier: {1} | Building: {2} | Location: {3}",
-                        GraveCrypt, LotTier, BlockBuilding, SectionLocation);
+                    return
+                        $"Crypt: {GraveCrypt} | Tier: {LotTier} | Building: {BlockBuilding} | Location: {SectionLocation}";
                 }
                 else
                 {
-                    return string.Format("Grave: {0} | Lot: {1} | Block: {2} | Section: {3}",
-                        GraveCrypt, LotTier, BlockBuilding, SectionLocation);
+                    return
+                        $"Grave: {GraveCrypt} | Lot: {LotTier} | Block: {BlockBuilding} | Section: {SectionLocation}";
                 }
             }
         }
@@ -100,9 +100,16 @@ namespace Centralization.Models
         {
             get
             {
-                return string.Format("{0}, {1} - G: {2} | L: {3} | B: {4} | S: {5} => Buried {6}",
-                    LastName, FirstName, GraveCrypt, LotTier, BlockBuilding, SectionLocation,
-                    IDate?.ToString("MM/dd/yyyy"));
+                return
+                    $"{LastName}, {FirstName} - G: {GraveCrypt} | L: {LotTier} | B: {BlockBuilding} | S: {SectionLocation} => Buried {IDate?.ToString("MM/dd/yyyy")}";
+            }
+        }
+
+        public string Value
+        {
+            get
+            {
+                return $"{LastName}, {FirstName}";
             }
         }
     }

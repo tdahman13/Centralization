@@ -33,7 +33,7 @@ namespace Centralization.Pages.Applications
 
             MemorialApplication = await _memorialContext.MemorialApplications
                 .Include(m => m.LinkedInterments)
-                .FirstOrDefaultAsync(m => m.MemorialApplicationID == id);
+                .FirstOrDefaultAsync(m => m.MemorialApplicationId == id);
 
             if (MemorialApplication == null)
             {
@@ -67,7 +67,7 @@ namespace Centralization.Pages.Applications
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MemorialApplicationExists(MemorialApplication.MemorialApplicationID))
+                if (!MemorialApplicationExists(MemorialApplication.MemorialApplicationId))
                 {
                     return NotFound();
                 }
@@ -82,7 +82,7 @@ namespace Centralization.Pages.Applications
 
         private bool MemorialApplicationExists(int id)
         {
-            return _memorialContext.MemorialApplications.Any(e => e.MemorialApplicationID == id);
+            return _memorialContext.MemorialApplications.Any(e => e.MemorialApplicationId == id);
         }
     }
 }

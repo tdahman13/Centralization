@@ -6,7 +6,7 @@ namespace Centralization.Models
 {
     public class MemorialApplication
     {
-        public int MemorialApplicationID { get; set; }
+        public int MemorialApplicationId { get; set; }
 
         [Display(Name = "File Name")]
         public string FileName { get; set; }
@@ -34,8 +34,7 @@ namespace Centralization.Models
 
         public string GetPath()
         {
-            return string.Format(@"\{0}\{1}-{2}\{3}\{4}\", Cemeteries.parentCems[CemNo],
-                CemNo, Cemeteries.cems[CemNo], Type, DateTime.Now.Year);
+            return $@"\{Cemeteries.parentCems[CemNo]}\{CemNo}-{Cemeteries.cems[CemNo]}\{Type}\{DateTime.Now.Year}\";
         }
     }
 

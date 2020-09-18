@@ -38,7 +38,7 @@
                 failure: function (response) {
                     alert("fail: " + response);
                 }
-            })
+            });
         },
         delay: 600,
         minLength: 2,
@@ -65,7 +65,7 @@
                 failure: function (response) {
                     alert("fail: " + response);
                 }
-            })
+            });
         },
         delay: 600,
         minLength: 2,
@@ -111,7 +111,7 @@
             complete: function () {
                 $("#loading-image").hide();
             }
-        })
+        });
     });
 
     // Reset Location Form
@@ -148,7 +148,7 @@ function getData(idf, cemNo) {
         complete: function () {
             $("#loading-image").hide();
         }
-    })
+    });
 }
 
 // Clears edit forms

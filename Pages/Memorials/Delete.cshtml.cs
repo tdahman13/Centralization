@@ -32,7 +32,7 @@ namespace Centralization.Pages.Applications
 
             MemorialApplication = await _memorialContext.MemorialApplications
                 .Include(m => m.LinkedInterments).AsNoTracking()
-                .FirstOrDefaultAsync(m => m.MemorialApplicationID == id);
+                .FirstOrDefaultAsync(m => m.MemorialApplicationId == id);
 
             if (MemorialApplication == null)
             {

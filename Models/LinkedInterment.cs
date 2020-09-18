@@ -2,7 +2,7 @@
 {
     public class LinkedInterment
     {
-        public int LinkedIntermentID { get; set; }
+        public int LinkedIntermentId { get; set; }
         public int Idf { get; set; }
         public string CemNo { get; set; }
         public int MemorialApplicationID { get; set; }
