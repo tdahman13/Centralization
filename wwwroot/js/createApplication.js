@@ -149,7 +149,7 @@
             $("span[data-valmsg-for='MemorialApplication.LinkedInterments']").text('');
             var btn = $("<button class='btn bg-transparent' type='button' onclick='removeFromList(this)'>").text("x");
             var p = $("<p class='dead'>" + ui.item.label + "</p>")
-                .attr('data-cemNo', cemNo).attr('data-idf', idf).append(btn);
+                .attr("data-cemNo", cemNo).attr("data-idf", idf).append(btn);
             $("#relatedDeadDisplay").append(p);
         }
     });
